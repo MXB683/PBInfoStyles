@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "PBS | PBInfo Styles",
+  "version": "1.0",
+  "description": "Some extra styling options for pbinfo.ro",
+  "icons": {
+    "48": "images/icon-512.png",
+    "128": "images/icon-512.png"
+  },
+  "options_ui": {
+    "page": "options/index.html",
+    "open_in_tab": true
+  },
+  "action": {
+    "default_popup": "options/index.html",
+    "default_icon": {
+      "48": "images/icon-512.png",
+      "128": "images/icon-512.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.pbinfo.ro/*"],
+      "css": ["pbinfo/__all__/style.css"],
+      "js": ["pbinfo/__all__/script.js"]
+    },
+    {
+      "matches": ["*://*.pbinfo.ro/probleme-categorii/*"],
+      "js": ["pbinfo/probleme-categorii/script.js"]
+    },
+    {
+      "matches": ["*://*.pbinfo.ro/"],
+      "js": ["pbinfo/__home__/script.js"]
+    },
+    {
+      "matches": ["*://*.pbinfo.ro/probleme/*"],
+      "js": ["pbinfo/probleme/script.js"]
+    }
+  ],
+  "permissions": ["storage", "tabs"]
+}

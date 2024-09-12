@@ -1,0 +1,75 @@
+body {
+  width: 50em;
+  height: 40em;
+}
+
+* {
+  border-radius: 10px;
+  border-color: rgb(85, 85, 85);
+  font-weight: bold;
+  font-size: large;
+  font-family: Calibri, sans-serif;
+}
+
+h1 {
+  font-size: xx-large;
+}
+h2 {
+  font-size: x-large;
+}
+
+#save {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  & > #save_text {
+    font-size: xx-large;
+  }
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  margin: 0.2rem 0rem;
+  border-width: 0 0 0.1em 0;
+  padding: 0 0.3em;
+  outline-color: transparent;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.486);
+}
+
+#save.active > #save_time-left {
+  position: absolute;
+  bottom: 0;
+  left: 5px;
+  right: 5px;
+  background-color: rgb(240, 240, 240);
+  height: 5px;
+  animation: dissapear 3000ms;
+}
+
+@keyframes dissapear {
+  0% {
+    width: 90%;
+  }
+
+  100% {
+    width: 0%;
+  }
+}
+
+#algs {
+  min-width: 22.5em;
+}
+
+#addAlg {
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 100%;
+  font-size: xx-large;
+}

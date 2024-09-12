@@ -1,0 +1,44 @@
+#meniu-navigare-li-notificari-noi,
+#meniu-navigare-li-mesaje-noi,
+li>a[href="/logout.php"][title="Deconectare"],
+#adbw > div {
+  display: none;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+progress[value] {
+  --color: rgb(48, 114, 171);
+  --background: lightgrey;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  width: 200px;
+  margin: 0 10px;
+  border-radius: 10em;
+  background: var(--background);
+}
+
+progress[value]::-webkit-progress-bar {
+  border-radius: 10em;
+  background: var(--background);
+}
+
+progress[value]::-webkit-progress-value {
+  border-radius: 10em;
+  background: var(--color);
+}
+
+progress[value]::-moz-progress-bar {
+  border-radius: 10em;
+  background: var(--color);
+}
+
+label {
+  font-weight: bold;
+  display: block;
+}

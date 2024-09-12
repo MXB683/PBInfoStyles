@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pbinfo.ro Styles</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="index.js" defer></script>
+</head>
+
+<body>
+  <h1>Pbinfo.ro Styles</h1>
+  <h2>Settings</h2>
+  <button id="save">
+    <div id="save_text">Save Settings</div>
+    <div id="save_time-left"></div>
+  </button>
+  <br>
+  <input type="checkbox" id="icons-enabled" checked>
+  <label for="icons-enabled">Enable Icons</label>
+  <br>
+  <label for="font">Font: </label>
+  <input type="text" id="custom-font" placeholder="Calibri">
+  <br>
+  <label for="custom-font-link" style="margin-top: 1em;">
+    Custom CSS Font Link:
+  </label>
+  <div style="
+    width: 30em;
+    resize: horizontal;
+    overflow: hidden;
+  ">
+    <input type="text" id="custom-font-link" style="
+        width: 100%;
+        margin: 0;
+      " placeholder="@import url('https://fonts.cdnfonts.com/css/cascadia-code');"
+      value="@import url('https://fonts.cdnfonts.com/css/cascadia-code');">
+  </div>
+  <input type="checkbox" id="font-ligatures-enabled" checked>
+  <label for="font-ligatures-enabled">Font Ligatures (only applies to some fonts) </label>
+  <button style="display: inline; border-radius: 100%;" id="showLigsHelp"><b>?</b></button>
+  <dialog id="ligaturesHelp">
+    Font ligatures are two or more characters joined to make a single glyph
+    <br>
+    For example, &#60= is shown as ≤
+    <br>
+    <button id="hideLigsHelp">Ok</button>
+  </dialog>
+  <br>
+  <input type="checkbox" id="auto-auth">
+  <label for="auto-auth">Auto Authentification (log in automatically)</label>
+  <div id="auto-auth-credentials" style="margin-left: 1.5rem; display: none;" title="ONLY USE THIS ON A PERSONAL COMPUTER! FOLOSITI DOAR PE UN COMPUTER PERSONAL!">
+    <input type="text" id="auto-auth-username" placeholder="Username">
+    <br>
+    <input type="password" id="auto-auth-password" placeholder="Password">
+    <br>
+    <button id="auto-auth-save" title="Save Settings button will not save this information. Save credentials button will not save other settings. This info will not be restored, though it will be saved in the browser's cache.">Save Credentials</button>
+  </div>
+  <!-- <br>
+  <input type="checkbox" id="researcherEnabled" checked>
+  <label for="researcherEnabled">Enable Researcher (only works with some websites, e.g. bing.com 🤮)</label> -->
+  <br>
+  <button id="algConfig">Configure Algorithms</button>
+  <dialog id="algs">
+    <div style="position: absolute; top: 1.2em; left: 1em; text-align: left;">
+      Algorithms
+    </div>
+    <button style="position: absolute; top: 1em; right: 1em;" id="closeAlgs">
+      X
+    </button>
+    <br>
+    <br>
+    <br>
+    <button id="addAlg">+</button>
+    <fieldset class="algorithm default">
+      <legend style="float: right;">
+        <button>X</button>
+      </legend>
+      <input type="text" class="title" value="Hello World">
+      <br>
+      <br>
+      <textarea style="height: 10em; width: 20em;" placeholder="// Write code here and paste it into the editor on pbinfo.ro
+// Accepts any programming language
+//
+// Scrie cod aici și lipește-l în editor-ul de pe pbinfo.ro
+// Acceptă orice limbaj de programare">#include <iostream>
+
+using namespace std;
+
+int main()
+{
+  cout << "Hello World!" << endl;
+}</textarea>
+    </fieldset>
+  </dialog>
+</body>
+
+</html>
