@@ -20,8 +20,8 @@
   <input type="checkbox" id="icons-enabled" checked>
   <label for="icons-enabled">Enable Icons</label>
   <br>
-  <label for="font">Font: </label>
-  <input type="text" id="custom-font" placeholder="Calibri">
+  <label for="font" title="Some fonts may not render romanian charcters (ă, â, î, ș, ț)">Font: </label>
+  <input type="text" id="custom-font" placeholder="Calibri" title="Some fonts may not render romanian charcters (ă, â, î, ș, ț)">
   <br>
   <label for="custom-font-link" style="margin-top: 1em;">
     Custom CSS Font Link:
@@ -57,9 +57,12 @@
     <br>
     <button id="auto-auth-save" title="Save Settings button will not save this information. Save credentials button will not save other settings. This info will not be restored, though it will be saved in the browser's cache.">Save Credentials</button>
   </div>
-  <!-- <br>
-  <input type="checkbox" id="researcherEnabled" checked>
-  <label for="researcherEnabled">Enable Researcher (only works with some websites, e.g. bing.com 🤮)</label> -->
+  <br>
+  <input type="checkbox" id="replace-custom-characters">
+  <label for="replace-custom-characters">Replace romanian characters (ă -> a, ș -> s, ...)</label>
+  <br style="display: none;">
+  <input style="display: none;" type="checkbox" id="researcherEnabled" checked>
+  <label style="display: none;" for="researcherEnabled">WIP!!! Enable Researcher (only works with some websites, e.g. bing.com 🤮)</label>
   <br>
   <button id="algConfig">Configure Algorithms</button>
   <dialog id="algs">

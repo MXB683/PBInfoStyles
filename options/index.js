@@ -7,8 +7,8 @@ const save = () => {
   );
   const font = document.getElementById("custom-font").value;
   const customFontLink = document.getElementById("custom-font-link").value;
-  // const researcherEnabled =
-  //   document.getElementById("researcherEnabled").checked;
+  const researcherEnabled =
+    document.getElementById("researcherEnabled").checked;
   let algorithmNodes = document.querySelectorAll("#algs > fieldset.algorithm");
   let algorithms = [];
   algorithmNodes.forEach((element) => {
@@ -21,6 +21,9 @@ const save = () => {
       console.log(error);
     }
   });
+  const replaceCustomCharacters = document.getElementById(
+    "replace-custom-characters"
+  ).checked;
   chrome.storage.sync.set(
     {
       icons,
@@ -28,12 +31,19 @@ const save = () => {
       font,
       customFontLink,
       algorithms,
-      autoAuth: {
-        enabled: document.getElementById("auto-auth").checked,
-      },
-      // researcherEnabled,
+      researcherEnabled,
+      replaceCustomCharacters,
     },
     () => {
+      console.log({
+        icons,
+        fontLigatures,
+        font,
+        customFontLink,
+        algorithms,
+        researcherEnabled,
+        replaceCustomCharacters,
+      });
       document.getElementById("save").classList.add("active");
       document.getElementById("save_text").innerText = document
         .getElementById("save")
@@ -67,7 +77,8 @@ const restore = () => {
       autoAuth: {
         enabled: false,
       },
-      // researcherEnabled: true,
+      researcherEnabled: true,
+      replaceCustomCharacters: false,
     },
     (
       items = {
@@ -80,17 +91,21 @@ const restore = () => {
         autoAuth: {
           enabled: false,
         },
-        // researcherEnabled: true,
+        researcherEnabled: true,
+        replaceCustomCharacters: false,
       }
     ) => {
+      console.log(items);
       document.getElementById("icons-enabled").checked = items.icons;
       document.getElementById("font-ligatures-enabled").checked =
         items.fontLigatures;
       document.getElementById("custom-font").value = items.font;
       document.getElementById("custom-font-link").value = items.customFontLink;
       document.getElementById("auto-auth").checked = items.autoAuth.enabled;
-      // document.getElementById("researcherEnabled").checked =
-      //   items.researcherEnabled;
+      document.getElementById("researcherEnabled").checked =
+        items.researcherEnabled;
+      document.getElementById("replace-custom-characters").checked =
+        items.replaceCustomCharacters;
       // Algorithms
       items.algorithms.forEach((element) => {
         let node = document.createElement("fieldset");
@@ -209,6 +224,15 @@ saveButton.addEventListener("click", () => {
       }, 2000);
     }
   );
+});
+
+document.getElementById("auto-auth").addEventListener("change", (event) => {
+  if (event.target.checked) return;
+  chrome.storage.sync.set({
+    autoAuth: {
+      enabled: false,
+    },
+  });
 });
 
 document.getElementById("hideLigsHelp").addEventListener("click", hideLigsHelp);
