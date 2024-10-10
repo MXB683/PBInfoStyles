@@ -1,5 +1,5 @@
-try {
-  document.querySelectorAll("li.list-group-item").forEach(async (element) => {
+document.querySelectorAll("li.list-group-item").forEach(async (element) => {
+  try {
     element.setAttribute("style", "text-align: center;");
     element.children[0].children[1].classList.remove("right");
     let solvedProblems = Number(
@@ -23,5 +23,5 @@ try {
       node.setAttribute("value", solvedProblems);
       node.setAttribute("max", totalProblems);
     }, 500);
-  });
-} catch {}
+  } catch {}
+});

@@ -7,8 +7,8 @@ const save = () => {
   );
   const font = document.getElementById("custom-font").value;
   const customFontLink = document.getElementById("custom-font-link").value;
-  const researcherEnabled =
-    document.getElementById("researcherEnabled").checked;
+  const researcherEnabled = false;
+  // document.getElementById("researcherEnabled").checked;
   let algorithmNodes = document.querySelectorAll("#algs > fieldset.algorithm");
   let algorithms = [];
   algorithmNodes.forEach((element) => {
