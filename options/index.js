@@ -77,7 +77,7 @@ const restore = () => {
       autoAuth: {
         enabled: false,
       },
-      researcherEnabled: true,
+      researcherEnabled: false,
       replaceCustomCharacters: false,
     },
     (
@@ -91,7 +91,7 @@ const restore = () => {
         autoAuth: {
           enabled: false,
         },
-        researcherEnabled: true,
+        researcherEnabled: false,
         replaceCustomCharacters: false,
       }
     ) => {
