@@ -23,7 +23,7 @@ chrome.storage.sync.get(
       username: "",
       password: "",
     },
-    researcherEnabled: true,
+    researcherEnabled: false,
     replaceCustomCharacters: false,
   },
   (
@@ -39,7 +39,7 @@ chrome.storage.sync.get(
         username: "",
         password: "",
       },
-      researcherEnabled: true,
+      researcherEnabled: false,
       replaceCustomCharacters: false,
     }
   ) => {
