@@ -223,6 +223,21 @@ chrome.storage.sync.get(
       } catch {}
     }
 
+    // ANCHOR - Copy code elements
+    setTimeout(() => {
+      document.querySelectorAll("code").forEach((element) => {
+        element.addEventListener("click", () => {
+          const innerHTML = element.innerHTML;
+          console.log(innerHTML);
+          navigator.clipboard.writeText(innerHTML);
+          element.innerHTML = "Copied!";
+          setTimeout(() => {
+            element.innerHTML = innerHTML;
+          }, 500);
+        });
+      });
+    }, 500);
+
     // ANCHOR Font ligatures
     if (items.fontLigatures) {
       document.querySelector("body").style.fontVariantLigatures = "normal";
@@ -261,21 +276,23 @@ chrome.storage.sync.get(
     }
 
     // cuz y not
-    if (
-      document
-        .querySelector(
+    try {
+      if (
+        document
+          .querySelector(
+            "body > div:nth-child(2) > div.bg-primary > div > div > div.col-lg-10.col-md-9.col-sd-8 > p.very-big"
+          )
+          .innerHTML.includes("Aici ai probleme!")
+      ) {
+        document.querySelector(
           "body > div:nth-child(2) > div.bg-primary > div > div > div.col-lg-10.col-md-9.col-sd-8 > p.very-big"
-        )
-        .innerHTML.includes("Aici ai probleme!")
-    ) {
-      document.querySelector(
-        "body > div:nth-child(2) > div.bg-primary > div > div > div.col-lg-10.col-md-9.col-sd-8 > p.very-big"
-      ).innerHTML = document
-        .querySelector(
-          "body > div:nth-child(2) > div.bg-primary > div > div > div.col-lg-10.col-md-9.col-sd-8 > p.very-big"
-        )
-        .innerHTML.replace(" De informatică :)", "");
-    }
+        ).innerHTML = document
+          .querySelector(
+            "body > div:nth-child(2) > div.bg-primary > div > div > div.col-lg-10.col-md-9.col-sd-8 > p.very-big"
+          )
+          .innerHTML.replace(" De informatică :)", "");
+      }
+    } catch (_) {}
 
     // ANCHOR Remove top colored bar
     setInterval(() => {
