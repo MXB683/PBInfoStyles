@@ -42,3 +42,30 @@ label {
   font-weight: bold;
   display: block;
 }
+
+#navbar > ul > li,
+.navbar-header {
+  width: 5rem;
+  height: 5rem;
+}
+
+#navbar > ul > li:hover,
+.navbar-header > a:hover {
+  background-color: #0a0b0c !important;
+  border-radius: 100rem;
+}
+
+#navbar > ul:nth-child(1) > li:nth-child(1) {
+  width: 17rem;
+  &:hover {
+    background-color: transparent !important;
+  }
+}
+
+code {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  border-width: 0px !important;
+}
