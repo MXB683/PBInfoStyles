@@ -1,15 +1,17 @@
 "use strict";
 
-chrome.storage.sync.set(
-  {
-    profilePictureSource: document
-      .querySelector(
-        "#div-login > div > div.panel-heading > strong > span > a > img"
-      )
-      .getAttribute("src"),
-  },
-  () => {}
-);
+try {
+  chrome.storage.sync.set(
+    {
+      profilePictureSource: document
+        .querySelector(
+          "#div-login > div > div.panel-heading > strong > span > a > img"
+        )
+        .getAttribute("src"),
+    },
+    () => {}
+  );
+} catch (_) {}
 
 chrome.storage.sync.get({ icons: true }, (items) => {
   if (items.icons) {
