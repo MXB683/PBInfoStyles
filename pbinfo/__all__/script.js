@@ -572,5 +572,7 @@ chrome.storage.sync.get(
       `;
       document.body.appendChild(node);
     }
+
+    document.body.style.transform = "scale(1)";
   }
 );
