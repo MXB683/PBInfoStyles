@@ -1,27 +1,31 @@
-document.querySelectorAll("li.list-group-item").forEach(async (element) => {
-  try {
-    element.setAttribute("style", "text-align: center;");
-    element.children[0].children[1].classList.remove("right");
-    let solvedProblems = Number(
-      element.innerText.match(/\d+ rezolvate/)[0].split(" ")[0]
-    );
-    let totalProblems = Number(
-      element.innerText.match(/\d+ probleme/)[0].split(" ")[0]
-    );
+setTimeout(() => {
+  document.querySelectorAll("li.list-group-item").forEach(async (element) => {
     let node = document.createElement("progress");
-    node.setAttribute("value", solvedProblems);
-    node.setAttribute("max", totalProblems);
     element.children[0].children[1].append(document.createElement("br"));
     element.children[0].children[1].append(node);
+    element.style.textAlign = "center";
+    element.children[0].children[1].classList.remove("right");
+    let solvedProblems, totalProblems;
+    node.setAttribute("max", "100");
     setInterval(() => {
-      solvedProblems = Number(
-        element.innerText.match(/\d+ rezolvate/)[0].split(" ")[0]
-      );
-      totalProblems = Number(
-        element.innerText.match(/\d+ probleme/)[0].split(" ")[0]
-      );
-      node.setAttribute("value", solvedProblems);
-      node.setAttribute("max", totalProblems);
-    }, 500);
-  } catch {}
-});
+      try {
+        solvedProblems = Number(
+          element.innerText.match(/\d+ rezolvate/)[0].split(" ")[0]
+        );
+        totalProblems = Number(
+          element.innerText.match(/\d+ probleme/)[0].split(" ")[0]
+        );
+        if (solvedProblems === 0) {
+          node.setAttribute("value", "0");
+          return;
+        }
+        const minimumPercentage = 6;
+        const percentage = Math.round((solvedProblems / totalProblems) * 100);
+        node.setAttribute(
+          "value",
+          `${percentage >= minimumPercentage ? percentage : minimumPercentage}`
+        );
+      } catch (_) {}
+    }, 100);
+  });
+}, 50);

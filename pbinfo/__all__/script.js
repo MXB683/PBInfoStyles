@@ -273,23 +273,34 @@ chrome.storage.sync.get(
         â: "a",
         î: "i",
         ș: "s",
+        ş: "s",
         ț: "t",
+        ţ: "t",
         Ă: "A",
         Â: "A",
         Î: "I",
         Ș: "S",
         Ț: "T",
       };
-      for (const character in characters) {
-        document.querySelectorAll("*").forEach((element) => {
-          if (element.querySelector("*") === null) {
-            element.innerHTML = element.innerHTML.replace(
-              RegExp(character, "g"),
-              characters[character]
-            );
+
+      function replaceCharacters(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          let text = node.textContent;
+          for (const original in characters) {
+            const replacement = characters[original];
+            text = text.replace(new RegExp(original, "g"), replacement);
           }
-        });
+          node.textContent = text;
+        } else {
+          for (let i = 0; i < node.childNodes.length; i++) {
+            replaceCharacters(node.childNodes[i]);
+          }
+        }
       }
+
+      setInterval(() => {
+        replaceCharacters(document.body);
+      }, 1000);
     }
 
     // cuz y not
@@ -307,7 +318,7 @@ chrome.storage.sync.get(
           .querySelector(
             "body > div:nth-child(2) > div.bg-primary > div > div > div.col-lg-10.col-md-9.col-sd-8 > p.very-big"
           )
-          .innerHTML.replace(" De informatică :)", "");
+          .innerHTML.replace(/ De informatic[a|ă] :\)/, "");
       }
     } catch (_) {}
 
@@ -574,5 +585,9 @@ chrome.storage.sync.get(
     }
 
     document.body.style.transform = "scale(1)";
+
+    document
+      .querySelectorAll(".well.well-sm")
+      .forEach((element) => element.remove());
   }
 );
