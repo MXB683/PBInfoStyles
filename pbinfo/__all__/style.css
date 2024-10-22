@@ -11,7 +11,7 @@ a:hover {
 
 progress[value] {
   --color: rgb(48, 114, 171);
-  --background: lightgrey;
+  --background: #272A2B;
 
   -webkit-appearance: none;
   -moz-appearance: none;
