@@ -261,7 +261,7 @@ chrome.storage.sync.get(
     // ANCHOR Font Import
     {
       let node = document.createElement("style");
-      node.classList.add("pbinfo-custom-styling-extension__custom-import-link");
+      node.classList.add("pbs_custom-import-link");
       node.innerHTML = items.customFontLink;
       document.querySelector("head").appendChild(node);
     }
@@ -298,7 +298,7 @@ chrome.storage.sync.get(
         }
       }
 
-      setInterval(() => {
+      setTimeout(() => {
         replaceCharacters(document.body);
       }, 1000);
     }
