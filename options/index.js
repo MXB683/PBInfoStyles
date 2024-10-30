@@ -167,6 +167,26 @@ document.getElementById("closeAlgs").addEventListener("click", () => {
   document.getElementById("algs").close();
 });
 
+document.getElementById("cssConfig").addEventListener("click", () => {
+  document.getElementById("css").showModal();
+});
+
+document.getElementById("closeCSS").addEventListener("click", () => {
+  document.getElementById("css").close();
+});
+
+document
+  .getElementById("switchToAdvancedMode")
+  .addEventListener("click", () => {
+    document.getElementById("advancedMode").style.display = "block";
+    document.getElementById("easyMode").style.display = "none";
+  });
+
+document.getElementById("switchToEasyMode").addEventListener("click", () => {
+  document.getElementById("advancedMode").style.display = "none";
+  document.getElementById("easyMode").style.display = "block";
+});
+
 let algorithmNode = document
   .querySelector("fieldset.algorithm")
   .cloneNode(true);
@@ -239,3 +259,68 @@ document.getElementById("hideLigsHelp").addEventListener("click", hideLigsHelp);
 document.getElementById("showLigsHelp").addEventListener("click", showLigsHelp);
 document.getElementById("save").addEventListener("click", save);
 document.addEventListener("DOMContentLoaded", restore);
+
+// SECTION - Custom CSS
+
+// ANCHOR - Save CSS
+const saveCustomCSS = (css = "", sucessAction = () => {}) => {
+  console.log("Saving CSS");
+  chrome.storage.sync.set(
+    {
+      customCSS: css,
+    },
+    sucessAction
+  );
+};
+
+/**
+ * @type {HTMLIFrameElement}
+ */
+const cssIframe = document.getElementById("cssIframe");
+/**
+ * @type {HTMLTextAreaElement}
+ */
+const cssTextArea = document.getElementById("cssTextarea");
+
+cssIframe.addEventListener("load", () => {
+  cssIframe.contentDocument
+    .getElementById("generateCSS")
+    .addEventListener("click", () => {
+      console.log("%cGenerated CSS:", "font-size: 20px");
+      console.log(cssIframe.contentWindow.generatedCSS);
+      saveCustomCSS(cssIframe.contentWindow.generatedCSS);
+    });
+});
+
+document.getElementById("saveAdvancedCSS").addEventListener("click", () => {
+  saveCustomCSS(cssTextArea.value);
+});
+
+// ANCHOR - Load saved CSS
+
+chrome.storage.sync.get(
+  {
+    customCSS: "",
+  },
+  (
+    items = {
+      customCSS: "",
+    }
+  ) => {
+    cssTextArea.value = items.customCSS;
+    const parsedFieldsets = parseCSS(items.customCSS);
+    cssIframe.onload = () => {
+      cssIframe.contentDocument
+        .querySelector("#rulesets > fieldset:only-child")
+        .remove();
+      parsedFieldsets.forEach((fieldset) => {
+        cssIframe.contentDocument
+          .getElementById("rulesets")
+          .appendChild(fieldset);
+      });
+    };
+    console.log(parsedFieldsets);
+  }
+);
+
+// !SECTION - Custom CSS

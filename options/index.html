@@ -7,8 +7,8 @@
   <title>Pbinfo.ro Styles</title>
   <link rel="stylesheet" href="style.css">
   <script src="index.js" defer></script>
+  <script src="css_creator/parser.js"></script>
 </head>
-
 <body>
   <h1>Pbinfo.ro Styles</h1>
   <h2>Settings</h2>
@@ -96,6 +96,31 @@ int main()
   cout << "Hello World!" << endl;
 }</textarea>
     </fieldset>
+  </dialog>
+  <br>
+  <button id="cssConfig">Custom CSS</button>
+  <dialog id="css">
+    <div style="position: absolute; top: 1.2em; left: 1em; text-align: left;">
+      Custom CSS
+    </div>
+    <button style="position: absolute; top: 1em; right: 1em;" id="closeCSS">
+      X
+    </button>
+    <br>
+    <br>
+    <br>
+    <div id="advancedMode" style="display: none;">
+      <button id="switchToEasyMode">Switch to Easy Mode</button>
+      <br>
+      <button id="saveAdvancedCSS">Save CSS</button>
+      <br>
+      <textarea id="cssTextarea" style="height: 10em; width: 20em;" placeholder="/* Custom CSS goes here */"></textarea>
+    </div>
+    <div id="easyMode">
+      <button id="switchToAdvancedMode">Switch to Advanced Mode</button>
+      <br>
+      <iframe id="cssIframe" src="css_creator/index.html"></iframe>
+    </div>
   </dialog>
 </body>
 

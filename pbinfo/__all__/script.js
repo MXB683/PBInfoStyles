@@ -1,15 +1,5 @@
 "use strict";
 
-setInterval(() => {
-  if (
-    document.querySelector(
-      "#navbar > ul.nav.navbar-nav.navbar-right > li:nth-child(2) > a"
-    ).childElementCount === 0
-  ) {
-    window.location.reload();
-  }
-}, 1000);
-
 chrome.storage.sync.get(
   {
     icons: true,
@@ -25,6 +15,7 @@ chrome.storage.sync.get(
     },
     researcherEnabled: false,
     replaceCustomCharacters: false,
+    customCSS: true,
   },
   (
     items = {
@@ -41,6 +32,7 @@ chrome.storage.sync.get(
       },
       researcherEnabled: false,
       replaceCustomCharacters: false,
+      customCSS: true,
     }
   ) => {
     // ANCHOR - Login automatically
@@ -233,17 +225,30 @@ chrome.storage.sync.get(
 
     // ANCHOR - Copy code elements
     setTimeout(() => {
-      document.querySelectorAll("code").forEach((element) => {
-        element.addEventListener("click", () => {
-          const innerHTML = element.innerHTML;
-          console.log(innerHTML);
-          navigator.clipboard.writeText(innerHTML);
-          element.innerHTML = "Copied!";
-          setTimeout(() => {
-            element.innerHTML = innerHTML;
-          }, 500);
+      document
+        .querySelectorAll(
+          'code, #enunt pre[contenteditable="true"][editable="true"]'
+        )
+        .forEach((element) => {
+          element.removeAttribute("contenteditable");
+          element.removeAttribute("editable");
+          element.addEventListener("click", () => {
+            const innerHTML = element.innerHTML;
+            navigator.clipboard.writeText(innerHTML);
+            let length = element.innerText.length;
+            element.innerHTML = "";
+            if (length % 2 === 0) length -= 1;
+            length -= 7;
+            length /= 2;
+            length -= 1;
+            for (let i = 0; i < length; i++) element.innerHTML += "-";
+            element.innerHTML += " Copied! ";
+            for (let i = 0; i < length; i++) element.innerHTML += "-";
+            setTimeout(() => {
+              element.innerHTML = innerHTML;
+            }, 500);
+          });
         });
-      });
     }, 500);
 
     // ANCHOR Font ligatures
@@ -263,6 +268,14 @@ chrome.storage.sync.get(
       let node = document.createElement("style");
       node.classList.add("pbs_custom-import-link");
       node.innerHTML = items.customFontLink;
+      document.querySelector("head").appendChild(node);
+    }
+
+    // ANCHOR - Custom CSS
+    {
+      let node = document.createElement("style");
+      node.classList.add("pbs_custom-css");
+      node.innerHTML = items.customCSS;
       document.querySelector("head").appendChild(node);
     }
 
@@ -585,9 +598,5 @@ chrome.storage.sync.get(
     }
 
     document.body.style.transform = "scale(1)";
-
-    document
-      .querySelectorAll(".well.well-sm")
-      .forEach((element) => element.remove());
   }
 );

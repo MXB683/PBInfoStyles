@@ -73,3 +73,7 @@ dialog::backdrop {
   border-radius: 100%;
   font-size: xx-large;
 }
+
+iframe {
+  resize: both;
+}
