@@ -14,8 +14,12 @@ chrome.storage.sync.get(
     let blank_option = document.createElement("option");
     blank_option.setAttribute("value", "// Selectează un algoritm!");
     blank_option.innerText = "Copiază un algoritm în clipboard";
-    
     selectMenu.appendChild(blank_option);
+
+    let second_blank_option = document.createElement("option");
+    second_blank_option.setAttribute("value", "// Selectează un algoritm!");
+    selectMenu.appendChild(second_blank_option);
+
     items.algorithms.forEach((element) => {
       let option = document.createElement("option");
       option.setAttribute("value", `${element.algorithm}`);
@@ -24,7 +28,7 @@ chrome.storage.sync.get(
     });
     algorithmMenuParentNode.prepend(selectMenu);
     selectMenu.addEventListener("change", () => {
-      navigator.clipboard.writeText(`${selectMenu.value}\n`)
+      navigator.clipboard.writeText(`${selectMenu.value}\n`);
     });
   }
 );
