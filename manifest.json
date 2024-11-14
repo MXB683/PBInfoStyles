@@ -35,6 +35,10 @@
     {
       "matches": ["*://*.pbinfo.ro/probleme/*"],
       "js": ["pbinfo/probleme/script.js"]
+    },
+    {
+      "matches": ["*://*.pbinfo.ro/probleme/categorii/*"],
+      "js": ["pbinfo/probleme/categorii/script.js"]
     }
   ],
   "permissions": ["storage", "tabs"]
