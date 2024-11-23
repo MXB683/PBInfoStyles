@@ -37,7 +37,10 @@
       "js": ["pbinfo/probleme/script.js"]
     },
     {
-      "matches": ["*://*.pbinfo.ro/probleme/categorii/*"],
+      "matches": [
+        "*://*.pbinfo.ro/probleme/categorii/*",
+        "*://*.pbinfo.ro/?pagina=probleme-lista&tag=*"
+      ],
       "js": ["pbinfo/probleme/categorii/script.js"]
     }
   ],
