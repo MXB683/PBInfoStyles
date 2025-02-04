@@ -1,3 +1,7 @@
+:root {
+  --glow-color: #a8a8a8;
+}
+
 #meniu-navigare-li-notificari-noi,
 #meniu-navigare-li-mesaje-noi,
 li>a[href="/logout.php"][title="Deconectare"],
@@ -68,4 +72,48 @@ code {
 
 .dropdown-menu {
   border-width: 0px !important;
+}
+
+.dropdown-toggle::after {
+  color: transparent;
+}
+
+svg {
+  fill: #929292;
+}
+
+svg:hover {
+  fill: #ffffff;
+}
+
+li:hover,
+#bara_navigare > div > a:hover {
+  animation: startglow 500ms;
+  filter: drop-shadow(0 0 20px var(--glow-color));
+}
+
+@keyframes startglow {
+  0% {
+    filter: drop-shadow(0 0 0 var(--glow-color));
+  }
+  10% {
+    filter: drop-shadow(0 0 10px var(--glow-color));
+  }
+  100% {
+    filter: drop-shadow(0 0 20px var(--glow-color));
+  }
+}
+
+ul.dropdown-menu.show {
+  margin-top: 0 !important;
+}
+
+.CodeMirror {
+  background: #36393d !important;
+  border-color: #495057 !important;
+}
+
+.CodeMirror-gutters {
+  background: #2b2c2f !important;
+  border-right: #495057 !important;
 }

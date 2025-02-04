@@ -70,9 +70,9 @@ const restore = () => {
     {
       icons: true,
       fontLigatures: true,
-      font: "cascadia code",
+      font: "JetBrains Mono",
       customFontLink:
-        "@import url('https://fonts.cdnfonts.com/css/cascadia-code');",
+        "@import url('https://fonts.cdnfonts.com/css/jetbrains-mono');",
       algorithms: [{}],
       autoAuth: {
         enabled: false,
@@ -84,9 +84,9 @@ const restore = () => {
       items = {
         icons: true,
         fontLigatures: true,
-        font: "cascadia code",
+        font: "JetBrains Mono",
         customFontLink:
-          "@import url('https://fonts.cdnfonts.com/css/cascadia-code');",
+          "@import url('https://fonts.cdnfonts.com/css/jetbrains-mono');",
         algorithms: [{}],
         autoAuth: {
           enabled: false,
