@@ -143,7 +143,7 @@ chrome.storage.sync.get(
           .href.includes("/?pagina=creare-cont")
       ) {
         document.querySelector(
-          "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:nth-child(2) > a"
+          "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:nth-last-child(4) > a"
         ).innerHTML += `
           <img style="
             width: 1.6rem;
@@ -162,21 +162,15 @@ chrome.storage.sync.get(
         .forEach((element) => {
           element.removeAttribute("contenteditable");
           element.removeAttribute("editable");
-          element.addEventListener("click", () => {
+          element.addEventListener("click", (event) => {
             const innerHTML = element.innerHTML;
             navigator.clipboard.writeText(innerHTML);
-            let length = element.innerText.length;
-            element.innerHTML = "";
-            if (length % 2 === 0) length -= 1;
-            length -= 7;
-            length /= 2;
-            length -= 1;
-            for (let i = 0; i < length; i++) element.innerHTML += "-";
-            element.innerHTML += " Copied! ";
-            for (let i = 0; i < length; i++) element.innerHTML += "-";
+
+            // Create ripple effect
+            element.classList.add("ripple");
             setTimeout(() => {
-              element.innerHTML = innerHTML;
-            }, 500);
+              element.classList.remove("ripple");
+            }, 1000);
           });
         });
     }, 500);

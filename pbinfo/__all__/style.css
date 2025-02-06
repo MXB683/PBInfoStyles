@@ -117,3 +117,31 @@ ul.dropdown-menu.show {
   background: #2b2c2f !important;
   border-right: #495057 !important;
 }
+
+a.dropdown-toggle.show svg {
+  fill: #ffffff;
+}
+
+.ripple {
+  animation: greenglow 500ms;
+}
+
+@keyframes greenglow {
+  0% {
+    filter: drop-shadow(0 0 0 rgb(157, 255, 157));
+  }
+  20% {
+    filter: drop-shadow(0 0 50px rgb(157, 255, 157));
+  }
+  70% {
+    filter: drop-shadow(0 0 10px rgb(157, 255, 157));
+  }
+  100% {
+    filter: drop-shadow(0 0 0 rgb(157, 255, 157));
+  }
+}
+
+thead th {
+  background-color: #393c3f !important;
+  color: #ffffff !important;
+}
