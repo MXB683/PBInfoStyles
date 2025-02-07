@@ -141,7 +141,7 @@ a.dropdown-toggle.show svg {
   }
 }
 
-thead th {
+thead th, tbody th {
   background-color: #393c3f !important;
   color: #ffffff !important;
 }
