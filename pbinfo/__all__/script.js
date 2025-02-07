@@ -228,6 +228,17 @@ chrome.storage.sync.get(
             text = text.replace(new RegExp(original, "g"), replacement);
           }
           node.textContent = text;
+        } else if (
+          node.nodeType === Node.ELEMENT_NODE &&
+          node.tagName === "INPUT" &&
+          (node.type === "text" || node.type === "search")
+        ) {
+          let text = node.placeholder;
+          for (const original in characters) {
+            const replacement = characters[original];
+            text = text.replace(new RegExp(original, "g"), replacement);
+          }
+          node.placeholder = text;
         } else {
           for (let i = 0; i < node.childNodes.length; i++) {
             replaceCharacters(node.childNodes[i]);
@@ -237,7 +248,7 @@ chrome.storage.sync.get(
 
       setTimeout(() => {
         replaceCharacters(document.body);
-      }, 1000);
+      }, 100);
     }
 
     // cuz y not
@@ -522,5 +533,10 @@ chrome.storage.sync.get(
     }
 
     document.body.style.transform = "scale(1)";
+
+    // ANCHOR - Make table headers' text visible
+    document.querySelectorAll("th").forEach((element) => {
+      element.classList.remove("text-dark");
+    });
   }
 );
