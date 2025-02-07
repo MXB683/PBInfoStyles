@@ -5,7 +5,7 @@ try {
     {
       profilePictureSource: document
         .querySelector(
-          "#div-login > div > div.panel-heading > strong > span > a > img"
+          "#div-login > div > div.card-header > strong > span > a > img"
         )
         .getAttribute("src"),
     },
