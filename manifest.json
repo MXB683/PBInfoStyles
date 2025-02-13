@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "PBS | PBInfo Styles",
-  "version": "2.0",
+  "version": "2.1",
   "description": "Some extra styling options for pbinfo.ro",
   "icons": {
     "48": "images/icon-512.png",
@@ -20,26 +20,26 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.pbinfo.ro/*"],
+      "matches": ["https://www.pbinfo.ro/*"],
       "css": ["pbinfo/__all__/style.css"],
       "js": ["pbinfo/__all__/script.js"]
     },
     {
-      "matches": ["*://*.pbinfo.ro/probleme-categorii/*"],
+      "matches": ["https://www.pbinfo.ro/probleme-categorii/*"],
       "js": ["pbinfo/probleme-categorii/script.js"]
     },
     {
-      "matches": ["*://*.pbinfo.ro/"],
+      "matches": ["https://www.pbinfo.ro/"],
       "js": ["pbinfo/__home__/script.js"]
     },
     {
-      "matches": ["*://*.pbinfo.ro/probleme/*"],
+      "matches": ["https://www.pbinfo.ro/probleme/*"],
       "js": ["pbinfo/probleme/script.js"]
     },
     {
       "matches": [
-        "*://*.pbinfo.ro/probleme/categorii/*",
-        "*://*.pbinfo.ro/?pagina=probleme-lista&tag=*"
+        "https://www.pbinfo.ro/probleme/categorii/*",
+        "https://www.pbinfo.ro/?pagina=probleme-lista&tag=*"
       ],
       "js": ["pbinfo/probleme/categorii/script.js"]
     }

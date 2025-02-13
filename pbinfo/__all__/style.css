@@ -87,7 +87,9 @@ svg:hover {
 }
 
 li:hover,
-#bara_navigare > div > a:hover {
+#bara_navigare > div > a:hover,
+button:hover,
+a:hover {
   animation: startglow 500ms;
   filter: drop-shadow(0 0 20px var(--glow-color));
 }
@@ -144,4 +146,12 @@ a.dropdown-toggle.show svg {
 thead th, tbody th {
   background-color: #393c3f !important;
   color: #ffffff !important;
+}
+
+.pbs_tooltip {
+  display: none;
+}
+
+li:hover .pbs_tooltip {
+  display: block;
 }
