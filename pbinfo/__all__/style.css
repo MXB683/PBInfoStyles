@@ -82,7 +82,7 @@ svg {
   fill: #929292;
 }
 
-svg:hover {
+a:hover svg {
   fill: #ffffff;
 }
 
