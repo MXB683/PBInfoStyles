@@ -193,10 +193,8 @@ chrome.storage.sync.get(
           element.removeAttribute("contenteditable");
           element.removeAttribute("editable");
           element.addEventListener("click", (event) => {
-            const innerHTML = element.innerHTML;
-            navigator.clipboard.writeText(innerHTML);
+            navigator.clipboard.writeText(element.innerHTML);
 
-            // Create ripple effect
             element.classList.add("ripple");
             setTimeout(() => {
               element.classList.remove("ripple");
