@@ -6,8 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pbinfo.ro Styles</title>
   <link rel="stylesheet" href="style.css">
-  <script src="index.js" defer></script>
-  <script src="css_creator/parser.js"></script>
+  <script src="./index.js" defer></script>
+  <script src="./utils.js"></script>
+  <script src="./defaultAlgorithms.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
   <h1>Pbinfo.ro Styles</h1>
@@ -61,8 +63,6 @@
   <input type="checkbox" id="replace-custom-characters">
   <label for="replace-custom-characters">Replace romanian characters (ă -> a, ș -> s, ...)</label>
   <br style="display: none;">
-  <input style="display: none;" type="checkbox" id="researcherEnabled">
-  <label style="display: none;" for="researcherEnabled">WIP!!! Enable Researcher (only works with some websites, e.g. bing.com 🤮)</label>
   <br>
   <button id="algConfig">Configure Algorithms</button>
   <dialog id="algs">
@@ -71,6 +71,9 @@
     </div>
     <button style="position: absolute; top: 1em; right: 1em;" id="closeAlgs">
       X
+    </button>
+    <button style="position: absolute; top: 1em; right: 2.75em;" title="Import some pre-made algorithms (C++ only)" id="importTemplateAlgs">
+      <i class="fa fa-file-import" aria-hidden="true"></i>
     </button>
     <br>
     <br>

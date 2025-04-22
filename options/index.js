@@ -7,8 +7,6 @@ const save = () => {
   );
   const font = document.getElementById("custom-font").value;
   const customFontLink = document.getElementById("custom-font-link").value;
-  const researcherEnabled = false;
-  // document.getElementById("researcherEnabled").checked;
   let algorithmNodes = document.querySelectorAll("#algs > fieldset.algorithm");
   let algorithms = [];
   algorithmNodes.forEach((element) => {
@@ -31,7 +29,6 @@ const save = () => {
       font,
       customFontLink,
       algorithms,
-      researcherEnabled,
       replaceCustomCharacters,
     },
     () => {
@@ -41,7 +38,6 @@ const save = () => {
         font,
         customFontLink,
         algorithms,
-        researcherEnabled,
         replaceCustomCharacters,
       });
       document.getElementById("save").classList.add("active");
@@ -77,7 +73,6 @@ const restore = () => {
       autoAuth: {
         enabled: false,
       },
-      researcherEnabled: false,
       replaceCustomCharacters: false,
     },
     (
@@ -91,7 +86,6 @@ const restore = () => {
         autoAuth: {
           enabled: false,
         },
-        researcherEnabled: false,
         replaceCustomCharacters: false,
       }
     ) => {
@@ -102,8 +96,6 @@ const restore = () => {
       document.getElementById("custom-font").value = items.font;
       document.getElementById("custom-font-link").value = items.customFontLink;
       document.getElementById("auto-auth").checked = items.autoAuth.enabled;
-      document.getElementById("researcherEnabled").checked =
-        items.researcherEnabled;
       document.getElementById("replace-custom-characters").checked =
         items.replaceCustomCharacters;
       // Algorithms
@@ -165,6 +157,15 @@ document.getElementById("algConfig").addEventListener("click", () => {
 
 document.getElementById("closeAlgs").addEventListener("click", () => {
   document.getElementById("algs").close();
+});
+
+document.getElementById("importTemplateAlgs").addEventListener("click", () => {
+  document
+    .querySelectorAll("fieldset.algorithm.default")
+    .forEach((e) => e.remove());
+  cppAlgorithms.forEach((alg) =>
+    document.getElementById("algs").appendChild(alg)
+  );
 });
 
 document.getElementById("cssConfig").addEventListener("click", () => {
