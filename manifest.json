@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "PBS | PBInfo Styles",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Some extra styling options for pbinfo.ro",
   "icons": {
     "48": "images/icon-512.png",
