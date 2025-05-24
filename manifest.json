@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "PBS | PBInfo Styles",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "Some extra styling options for pbinfo.ro",
   "icons": {
     "48": "images/icon-512.png",
@@ -14,8 +14,8 @@
   "action": {
     "default_popup": "options/index.html",
     "default_icon": {
-      "48": "images/icon-512.png",
-      "128": "images/icon-512.png"
+      "48": "images/settings.png",
+      "128": "images/settings.png"
     }
   },
   "content_scripts": [

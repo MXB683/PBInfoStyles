@@ -2,11 +2,10 @@
 
 chrome.storage.sync.get(
   {
-    icons: true,
+    enableIcons: true,
     fontLigatures: true,
     font: "JetBrains Mono",
-    customFontLink:
-      "@import url('https://fonts.cdnfonts.com/css/jetbrains-mono');",
+    fontLink: "@import url('https://fonts.cdnfonts.com/css/jetbrains-mono');",
     profilePictureSource: "",
     autoAuth: {
       enabled: false,
@@ -18,11 +17,10 @@ chrome.storage.sync.get(
   },
   (
     items = {
-      icons: true,
+      enableIcons: true,
       fontLigatures: true,
       font: "JetBrains Mono",
-      customFontLink:
-        "@import url('https://fonts.cdnfonts.com/css/jetbrains-mono');",
+      fontLink: "@import url('https://fonts.cdnfonts.com/css/jetbrains-mono');",
       profilePictureSource: "",
       autoAuth: {
         enabled: false,
@@ -96,8 +94,8 @@ chrome.storage.sync.get(
       `;
     }
 
-    // ANCHOR Icons
-    if (items.icons) {
+    // ANCHOR Enable Icons
+    if (items.enableIcons) {
       document.querySelector("#bara_navigare > div > a").innerHTML = `
         <img src="https://www.pbinfo.ro/img/pbinfo5.png" style="
             width: 15rem;
@@ -203,22 +201,20 @@ chrome.storage.sync.get(
 
     // ANCHOR Font ligatures
     if (items.fontLigatures) {
-      document.querySelector("body").style.fontVariantLigatures = "normal";
+      document.body.style.fontVariantLigatures = "normal";
     } else {
-      document.querySelector("body").style.fontVariantLigatures = "none";
+      document.body.style.fontVariantLigatures = "none";
     }
 
     // ANCHOR Font
-    document.querySelector(
-      "body"
-    ).style.fontFamily = `${items.font}, sans-serif`;
+    document.body.style.fontFamily = `${items.font}, sans-serif`;
 
     // ANCHOR Font Import
     {
       let node = document.createElement("style");
-      node.classList.add("pbs_custom-import-link");
-      node.innerHTML = items.customFontLink;
-      document.querySelector("head").appendChild(node);
+      node.classList.add("pbs_font-import-link");
+      node.innerHTML = `@import url("${items.fontLink}");`;
+      document.head.appendChild(node);
     }
 
     // ANCHOR - Custom CSS
@@ -226,7 +222,7 @@ chrome.storage.sync.get(
       let node = document.createElement("style");
       node.classList.add("pbs_custom-css");
       node.innerHTML = items.customCSS;
-      document.querySelector("head").appendChild(node);
+      document.head.appendChild(node);
     }
 
     // ANCHOR - Replace custom language characters
@@ -309,3 +305,11 @@ chrome.storage.sync.get(
     });
   }
 );
+
+// ANCHOR - Add watermark
+const watermark = document.createElement("div");
+watermark.id = "pbs_watermark";
+watermark.class = "container";
+watermark.innerHTML = `<div class="center">Înfrumusețat cu <a href="https://github.com/MXB683/PBInfoStyles" target="_blank">PBInfoStyles</a></div>`;
+document.getElementById("footer").appendChild(document.createElement("hr"));
+document.getElementById("footer").appendChild(watermark);

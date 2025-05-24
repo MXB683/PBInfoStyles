@@ -1,130 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pbinfo.ro Styles</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="./index.js" defer></script>
-  <script src="./utils.js"></script>
-  <script src="./defaultAlgorithms.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-</head>
-<body>
-  <h1>Pbinfo.ro Styles</h1>
-  <h2>Settings</h2>
-  <button id="save">
-    <div id="save_text">Save Settings</div>
-    <div id="save_time-left"></div>
-  </button>
-  <br>
-  <input type="checkbox" id="icons-enabled" checked>
-  <label for="icons-enabled">Enable Icons</label>
-  <br>
-  <label for="font" title="Some fonts may not render romanian charcters (ă, â, î, ș, ț)">Font: </label>
-  <input type="text" id="custom-font" placeholder="Calibri" title="Some fonts may not render romanian charcters (ă, â, î, ș, ț)">
-  <br>
-  <label for="custom-font-link" style="margin-top: 1em;">
-    Custom CSS Font Link:
-  </label>
-  <div style="
-    width: 30em;
-    resize: horizontal;
-    overflow: hidden;
-  ">
-    <input type="text" id="custom-font-link" style="
-        width: 100%;
-        margin: 0;
-      " placeholder="@import url('https://fonts.cdnfonts.com/css/cascadia-code');"
-      value="@import url('https://fonts.cdnfonts.com/css/cascadia-code');">
-  </div>
-  <input type="checkbox" id="font-ligatures-enabled" checked>
-  <label for="font-ligatures-enabled">Font Ligatures (only applies to some fonts) </label>
-  <button style="display: inline; border-radius: 100%;" id="showLigsHelp"><b>?</b></button>
-  <dialog id="ligaturesHelp">
-    Font ligatures are two or more characters joined to make a single glyph
-    <br>
-    For example, &#60= is shown as ≤
-    <br>
-    <button id="hideLigsHelp">Ok</button>
-  </dialog>
-  <br>
-  <input type="checkbox" id="auto-auth">
-  <label for="auto-auth">Auto Authentification (log in automatically)</label>
-  <div id="auto-auth-credentials" style="margin-left: 1.5rem; display: none;" title="ONLY USE THIS ON A PERSONAL COMPUTER! FOLOSITI DOAR PE UN COMPUTER PERSONAL!">
-    <input type="text" id="auto-auth-username" placeholder="Username">
-    <br>
-    <input type="password" id="auto-auth-password" placeholder="Password">
-    <br>
-    <button id="auto-auth-save" title="Save Settings button will not save this information. Save credentials button will not save other settings. This info will not be restored, though it will be saved in the browser's cache.">Save Credentials</button>
-  </div>
-  <br>
-  <input type="checkbox" id="replace-custom-characters">
-  <label for="replace-custom-characters">Replace romanian characters (ă -> a, ș -> s, ...)</label>
-  <br style="display: none;">
-  <br>
-  <button id="algConfig">Configure Algorithms</button>
-  <dialog id="algs">
-    <div style="position: absolute; top: 1.2em; left: 1em; text-align: left;">
-      Algorithms
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pbinfo.ro Styles</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="./index.js" defer></script>
+    <script src="./script.js" defer></script>
+    <script src="./utils.js"></script>
+    <script src="./defaultAlgorithms.js"></script>
+    <script src="cm/lib/codemirror.js"></script>
+    <script src="cm/mode/css/css.js"></script>
+    <script src="cm/addon/edit/closebrackets.js"></script>
+    <script src="cm/addon/edit/matchbrackets.js"></script>
+    <script src="cm/addon/selection/active-line.js"></script>
+    <script src="cm/addon/display/rulers.js"></script>
+    <link rel="stylesheet" href="cm/lib/codemirror.css" />
+    <link rel="stylesheet" href="cm/theme/lucario.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div id="fullscreen" style="display: none">
+      <input type="text" name="fullscreenTitle" id="fullscreenTitle" />
+      <button id="closeFullscreen">
+        <i class="fa fa-compress" aria-hidden="true"></i>
+      </button>
+      <textarea id="fullscreenContent"></textarea>
     </div>
-    <button style="position: absolute; top: 1em; right: 1em;" id="closeAlgs">
-      X
-    </button>
-    <button style="position: absolute; top: 1em; right: 2.75em;" title="Import some pre-made algorithms (C++ only)" id="importTemplateAlgs">
-      <i class="fa fa-file-import" aria-hidden="true"></i>
-    </button>
-    <br>
-    <br>
-    <br>
-    <button id="addAlg">+</button>
-    <fieldset class="algorithm default">
-      <legend style="float: right;">
-        <button>X</button>
-      </legend>
-      <input type="text" class="title" value="Hello World">
-      <br>
-      <br>
-      <textarea style="height: 10em; width: 20em;" placeholder="// Write code here and paste it into the editor on pbinfo.ro
-// Accepts any programming language
-//
-// Scrie cod aici și lipește-l în editor-ul de pe pbinfo.ro
-// Acceptă orice limbaj de programare">#include <iostream>
+    <div class="container">
+      <header>
+        <img src="../images/icon-512.png" alt="PBInfoStyles Logo" />
+        <div class="verticalSeparator"></div>
+        <div class="subheader">
+          PBinfoStyles
+          <div class="subtitle">Settings</div>
+        </div>
+      </header>
+      <hr />
+      <br />
+      <div class="setting switch" id="enableIcons">
+        <div class="switch-bg">
+          <div class="switch-dot"></div>
+        </div>
+        Enable Icons
+      </div>
+      <div class="setting text">
+        <label
+          for="font"
+          title="Some fonts may not render romanian characters (ă, â, î, ș, ț)"
+          >Font:
+        </label>
+        <input
+          type="text"
+          id="font"
+          placeholder="Calibri"
+          value="JetBrains Mono"
+          title="Some fonts may not render romanian charcters (ă, â, î, ș, ț)"
+          class="saveableSetting"
+        />
+      </div>
+      <div class="setting text">
+        <label for="fontLink" style="margin-top: 1em"> Font Link: </label>
+        <input
+          type="text"
+          id="fontLink"
+          placeholder="https://fonts.cdnfonts.com/css/jetbrains-mono"
+          value="https://fonts.cdnfonts.com/css/jetbrains-mono"
+          class="saveableSetting"
+        />
+      </div>
+      <div
+        id="fontLigatures"
+        class="setting switch"
+        title="Font ligatures are two or more characters joined to make a single glyph. For example, &#60;= is shown as ≤"
+      >
+        <div class="switch-bg">
+          <div class="switch-dot"></div>
+        </div>
+        Font Ligatures
+      </div>
+
+      <div
+        id="autoAuth-setting"
+        title="Automatically log in to pbinfo.ro. ONLY USE THIS ON A PERSONAL COMPUTER!"
+      >
+        <div class="setting switch" id="autoAuth">
+          <div class="switch-bg">
+            <div class="switch-dot"></div>
+          </div>
+          Auto Authentification
+        </div>
+        <div
+          id="autoAuth-credentials"
+          title="ONLY USE THIS ON A PERSONAL COMPUTER! FOLOSITI DOAR PE UN COMPUTER PERSONAL!"
+        >
+          <input type="text" id="autoAuth-username" placeholder="Username" />
+          <input
+            type="password"
+            id="autoAuth-password"
+            placeholder="Password"
+          />
+          <button id="autoAuth-save" class="w100">Save Credentials</button>
+        </div>
+      </div>
+      <div
+        class="setting switch"
+        id="replaceCustomCharacters"
+        title="ă/â → a, î → i, ș → s, ț → t"
+      >
+        <div class="switch-bg">
+          <div class="switch-dot"></div>
+        </div>
+        Replace romanian characters
+      </div>
+
+      <div id="algConfig" class="setting button">
+        <div class="label" id="closeAlgs">
+          <i class="fa fa-gear label-icon" aria-hidden="true"></i>
+          Configure Algorithms
+        </div>
+        <div id="algs">
+          <div class="topRow">
+            <button
+              title="Import some pre-made algorithms (C++ only)"
+              id="importTemplateAlgs"
+            >
+              <i class="fa fa-file-import" aria-hidden="true"></i>
+              Import Algorithms
+            </button>
+            <button id="addAlg">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              Add
+            </button>
+          </div>
+          <fieldset class="algorithm default">
+            <div class="algTopRow">
+              <input type="text" class="title" value="Hello World" />
+              <button class="makeTextareaFullscreen">
+                <i class="fa fa-expand" aria-hidden="true"></i>
+              </button>
+              <button class="deleteAlg">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            </div>
+            <textarea
+              placeholder="// Write code here and paste it into the editor on pbinfo.ro
+    // Accepts any programming language
+    //
+    // Scrie cod aici și lipește-l în editor-ul de pe pbinfo.ro
+    // Acceptă orice limbaj de programare"
+            >
+#include &#60;iostream&#62;
 
 using namespace std;
 
 int main()
 {
-  cout << "Hello World!" << endl;
-}</textarea>
-    </fieldset>
-  </dialog>
-  <br>
-  <button id="cssConfig">Custom CSS</button>
-  <dialog id="css">
-    <div style="position: absolute; top: 1.2em; left: 1em; text-align: left;">
-      Custom CSS
+  cout &#60;&#60; "Hello World!" &#60;&#60; endl;
+}</textarea
+            >
+          </fieldset>
+        </div>
+      </div>
+      <div id="cssConfig" class="setting button">
+        <div class="label" id="closeCSS">
+          <i class="fa fa-gear label-icon" aria-hidden="true"></i>
+          Configure Custom CSS
+        </div>
+        <div id="css">
+          <textarea
+            name="customCss"
+            id="customCss"
+            placeholder="/* Custom CSS goes here */"
+          ></textarea>
+          <button id="saveCss" class="w100">Save CSS</button>
+        </div>
+      </div>
+      <br />
+      <hr />
+      <div class="description">
+        <p class="centerText">
+          <a href="https://www.github.com/MXB683/PBInfoStyles">PBS</a>
+          is an open-source project available on GitHub.
+          <br />
+          If you have any suggestions, issues, or contributions, please feel
+          free to open an issue or pull request on the
+          <a href="https://www.github.com/MXB683/PBInfoStyles"
+            >GitHub repository</a
+          >
+        </p>
+        <hr />
+        <p class="centerText">
+          <a
+            href="https://www.github.com/MXB683/PBInfoStyles"
+            title="PBInfoStyles"
+            >PBS</a
+          >
+          is an extension designed to enhance your experience on
+          <a href="https://www.pbinfo.ro" target="_blank">PBinfo</a> by
+          providing
+          <br />
+          custom CSS and algorithms.
+          <br />
+          <b>Note:</b> This extension is not affiliated
+          <br />
+          with
+          <a href="https://www.pbinfo.ro" target="_blank">PBinfo</a> in any way.
+        </p>
+        <hr />
+        <p class="centerText">All Rights Reserved &copy; 2025</p>
+        <button class="w100" id="refreshPBI">
+          <i class="fa fa-sync" aria-hidden="true"></i>
+          Refresh PBInfo
+        </button>
+      </div>
     </div>
-    <button style="position: absolute; top: 1em; right: 1em;" id="closeCSS">
-      X
-    </button>
-    <br>
-    <br>
-    <br>
-    <div id="advancedMode" style="display: none;">
-      <button id="switchToEasyMode">Switch to Easy Mode</button>
-      <br>
-      <button id="saveAdvancedCSS">Save CSS</button>
-      <br>
-      <textarea id="cssTextarea" style="height: 10em; width: 20em;" placeholder="/* Custom CSS goes here */"></textarea>
-    </div>
-    <div id="easyMode">
-      <button id="switchToAdvancedMode">Switch to Advanced Mode</button>
-      <br>
-      <iframe id="cssIframe" src="css_creator/index.html"></iframe>
-    </div>
-  </dialog>
-</body>
-
+  </body>
 </html>

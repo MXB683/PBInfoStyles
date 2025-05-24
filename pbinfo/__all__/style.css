@@ -4,7 +4,7 @@
 
 #meniu-navigare-li-notificari-noi,
 #meniu-navigare-li-mesaje-noi,
-li>a[href="/logout.php"][title="Deconectare"],
+li > a[href="/logout.php"][title="Deconectare"],
 #adbw > div {
   display: none;
 }
@@ -15,7 +15,7 @@ a:hover {
 
 progress[value] {
   --color: rgb(48, 114, 171);
-  --background: #272A2B;
+  --background: #272a2b;
 
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -92,6 +92,7 @@ button:hover,
 a:hover {
   animation: startglow 500ms;
   filter: drop-shadow(0 0 20px var(--glow-color));
+  z-index: 9999;
 }
 
 @keyframes startglow {
@@ -143,7 +144,8 @@ a.dropdown-toggle.show svg {
   }
 }
 
-thead th, tbody th {
+thead th,
+tbody th {
   background-color: #393c3f !important;
   color: #ffffff !important;
 }

@@ -13,8 +13,8 @@ try {
   );
 } catch (_) {}
 
-chrome.storage.sync.get({ icons: true }, (items) => {
-  if (items.icons) {
+chrome.storage.sync.get({ enableIcons: true }, (items) => {
+  if (items.enableIcons) {
     document.querySelector(
       "#div-login > div > div.card-body > div:nth-child(3) > div:nth-child(1) > a > span > span"
     ).innerHTML = `
