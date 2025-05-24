@@ -1,7 +1,0 @@
-{
-  "workbench.editor.customLabels.enabled": true,
-  "workbench.editor.customLabels.patterns": {
-    "*/Untitled-1": "example",
-    "*/options/css_creator/index.html": "css_creator"
-  }
-}
