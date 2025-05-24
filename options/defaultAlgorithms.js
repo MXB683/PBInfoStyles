@@ -115,4 +115,55 @@ bool palindrom(int x) {
 	}
 	return o == xc;
 }`),
+  new AlgorithmNode(`%base10toX%
+long long base10toX(long long n, int base) {
+    if(base == 10) return n;
+    int nr = 0, p = 1;
+    while(n) {
+        nr += (n % base) * p;
+        p *= 10;
+        n /= base;
+    }
+    return nr;
+}`),
+  new AlgorithmNode(`%baseXto10%
+long long baseXto10(long long n, int base) {
+    if(base == 10) return n;
+    int nr = 0, p = 1;
+    while(n) {
+        nr += (n % 10) * p;
+        p *= base;
+        n /= 10;
+    }
+    return nr;
+}`),
+  new AlgorithmNode(`%baseXtoY%
+long long base10toX(long long n, int base) {
+    if(base == 10) return n;
+    int nr = 0, p = 1;
+    while(n) {
+        nr += (n % base) * p;
+        p *= 10;
+        n /= base;
+    }
+    return nr;
+}
+
+long long baseXto10(long long n, int base) {
+    if(base == 10) return n;
+    int nr = 0, p = 1;
+    while(n) {
+        nr += (n % 10) * p;
+        p *= base;
+        n /= 10;
+    }
+    return nr;
+}
+
+long long baseXtoY(long long n, int baseX, int baseY) {
+    if(baseX == baseY) return n;
+    if(baseX == 10) return base10toX(n, baseY);
+    if(baseY == 10) return baseXto10(n, baseX);
+    return base10toX(baseXto10(n, baseX), baseY);
+}`),
 ];
