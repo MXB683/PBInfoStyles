@@ -82,3 +82,9 @@ document.getElementById("refreshPBI").addEventListener("click", () => {
     }
   });
 });
+
+document.getElementById("clearAlgs").addEventListener("click", () => {
+  document.querySelectorAll("fieldset.algorithm").forEach((element) => {
+    element.remove();
+  });
+});

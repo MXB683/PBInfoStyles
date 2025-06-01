@@ -285,10 +285,23 @@ hr {
     align-items: center;
     justify-content: center;
     transition: filter 0.2s ease-in-out;
+    width: 100% !important;
 
     &:hover {
       transition: filter 0.2s ease-in-out;
       filter: brightness(0.8);
+    }
+
+    &:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    &:nth-child(2) {
+      border-radius: 0;
+    }
+    &:last-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
     }
   }
 
@@ -296,10 +309,6 @@ hr {
     color: #475c64;
     font-size: 1.5rem;
     margin-right: 0.5rem;
-  }
-
-  #importTemplateAlgs {
-    width: 70%;
   }
 }
 

@@ -20,7 +20,7 @@ document.getElementById("fontLink").addEventListener("change", () => {
   });
 });
 
-document.getElementById("closeAlgs").addEventListener("click", () => {
+setInterval(() => {
   let algorithmNodes = document.querySelectorAll("#algs > fieldset.algorithm");
   let algorithms = [];
   algorithmNodes.forEach((element) => {
@@ -34,7 +34,7 @@ document.getElementById("closeAlgs").addEventListener("click", () => {
     }
   });
   chrome.storage.sync.set({ algorithms });
-});
+}, 200);
 
 const restore = () => {
   chrome.storage.sync.get(
