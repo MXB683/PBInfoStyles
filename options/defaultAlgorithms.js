@@ -1,5 +1,13 @@
 "use strict";
 const cppAlgorithms = [
+  new AlgorithmNode(`%fast cin%
+ios::sync_with_stdio(false);
+cin.tie(0);
+`),
+  new AlgorithmNode(`%fast std::cin%
+ios::sync_with_stdio(false);
+std::cin.tie(0);
+`),
   new AlgorithmNode(`%vmax (vector<int>)%
 int vmax(vector<int> v) {
 	int mx = v[0];
