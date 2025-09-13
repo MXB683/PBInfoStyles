@@ -313,3 +313,20 @@ watermark.class = "container";
 watermark.innerHTML = `<div class="center">Înfrumusețat cu <a href="https://github.com/MXB683/PBInfoStyles" target="_blank">PBInfoStyles</a></div>`;
 document.getElementById("footer").appendChild(document.createElement("hr"));
 document.getElementById("footer").appendChild(watermark);
+
+// ANCHOR - Scroll Animations
+const intersectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    entry.target.classList.toggle("inView", entry.isIntersecting);
+  });
+});
+
+const scrollAnimItems = document.querySelectorAll(
+  "*:not(script, style, #bara_navigare, #bara_navigare *, #footer, #footer *)"
+);
+
+scrollAnimItems.forEach((element) => {
+  element.classList.add("scrollAnimation");
+  element.classList.add("inView");
+  intersectionObserver.observe(element);
+});

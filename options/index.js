@@ -65,20 +65,9 @@ const restore = () => {
         enabled: false,
       },
       replaceCustomCharacters: false,
+      scrollAnimations: false,
     },
-    (
-      items = {
-        enableIcons: true,
-        fontLigatures: true,
-        font: "JetBrains Mono",
-        fontLink: "https://fonts.cdnfonts.com/css/jetbrains-mono",
-        algorithms: [],
-        autoAuth: {
-          enabled: false,
-        },
-        replaceCustomCharacters: false,
-      }
-    ) => {
+    (items) => {
       console.log(items);
       if (items.enableIcons)
         document.getElementById("enableIcons").classList.add("active");
@@ -92,6 +81,8 @@ const restore = () => {
         document
           .getElementById("replaceCustomCharacters")
           .classList.add("active");
+      if (items.scrollAnimations)
+        document.getElementById("scrollAnimations").classList.add("active");
       // Algorithms
       items.algorithms.forEach((element) => {
         document

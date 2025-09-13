@@ -66,16 +66,21 @@ class AlgorithmNode extends HTMLFieldSetElement {
    */
   constructor(algString, isDefault = true) {
     super();
+    let failed = false;
     algString = algString.trim();
-    if (!algString)
-      throw new SyntaxError("algString must be a non-empty string");
-    if (algString.match(/^%.+%\n(.|\n)*$/) === null)
-      throw new SyntaxError(
-        "algString must match the regex /^%.+%\\n(.|\\n)*$/"
-      );
+    if (!algString) {
+      console.error("algString must be a non-empty string");
+      failed = true;
+    }
+    if (algString.match(/^%.+%\n(.|\n)*$/) === null) {
+      failed = true;
+      console.error("algString must match the regex /^%.+%\\n(.|\\n)*$/");
+    }
 
-    const title = algString.split("\n")[0].replace(/%/g, "").trim();
-    const code = algString.split("\n").slice(1).join("\n").trim();
+    const title = failed
+      ? ""
+      : algString.split("\n")[0].replace(/%/g, "").trim();
+    const code = failed ? "" : algString.split("\n").slice(1).join("\n").trim();
     this.title = title;
     this.code = code;
     this.constructWithTitleAndCode(title, code, isDefault);

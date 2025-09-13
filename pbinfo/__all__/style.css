@@ -157,3 +157,13 @@ tbody th {
 li:hover .pbs_tooltip {
   display: block;
 }
+
+.scrollAnimation {
+  transition: all 0.3s ease-in-out;
+  scale: 0.5;
+
+  &.inView {
+    scale: inherit;
+    transition: all 0.3s ease-in-out;
+  }
+}
