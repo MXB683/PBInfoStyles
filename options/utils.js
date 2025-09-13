@@ -23,6 +23,8 @@ class AlgorithmNode extends HTMLFieldSetElement {
     this.title = "%title%";
     this.code = "%code%";
     this.classList.add("algorithm");
+    this.classList.add("scale-in-out");
+    this.classList.add("inView");
     if (isDefault) this.classList.add("default");
     this.innerHTML = `
       <div class="algTopRow">

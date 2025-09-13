@@ -30,8 +30,8 @@
       </button>
       <textarea id="fullscreenContent"></textarea>
     </div>
-    <div class="container">
-      <header>
+    <div class="container" id="settings">
+      <header class="scale-in-out">
         <img src="../images/icon-512.png" alt="PBInfoStyles Logo" />
         <div class="verticalSeparator"></div>
         <div class="subheader">
@@ -41,13 +41,13 @@
       </header>
       <hr />
       <br />
-      <div class="setting switch" id="enableIcons">
+      <div class="setting switch scale-in-out" id="enableIcons">
         <div class="switch-bg">
           <div class="switch-dot"></div>
         </div>
         Enable Icons
       </div>
-      <div class="setting text">
+      <div class="setting text scale-in-out">
         <label
           for="font"
           title="Some fonts may not render romanian characters (ă, â, î, ș, ț)"
@@ -62,7 +62,7 @@
           class="saveableSetting"
         />
       </div>
-      <div class="setting text">
+      <div class="setting text scale-in-out">
         <label for="fontLink" style="margin-top: 1em"> Font Link: </label>
         <input
           type="text"
@@ -74,7 +74,7 @@
       </div>
       <div
         id="fontLigatures"
-        class="setting switch"
+        class="setting switch scale-in-out"
         title="Font ligatures are two or more characters joined to make a single glyph. For example, &#60;= is shown as ≤"
       >
         <div class="switch-bg">
@@ -84,6 +84,7 @@
       </div>
 
       <div
+        class="scale-in-out"
         id="autoAuth-setting"
         title="Automatically log in to pbinfo.ro. ONLY USE THIS ON A PERSONAL COMPUTER!"
       >
@@ -107,7 +108,7 @@
         </div>
       </div>
       <div
-        class="setting switch"
+        class="setting switch scale-in-out"
         id="replaceCustomCharacters"
         title="ă/â → a, î → i, ș → s, ț → t"
       >
@@ -117,13 +118,13 @@
         Replace romanian characters
       </div>
 
-      <div id="algConfig" class="setting button">
+      <div id="algConfig" class="setting button scale-in-out">
         <div class="label" id="closeAlgs">
           <i class="fa fa-gear label-icon" aria-hidden="true"></i>
           Configure Algorithms
         </div>
         <div id="algs">
-          <div class="topRow">
+          <div class="topRow scale-in-out">
             <button
               title="Import some pre-made algorithms (C++ only)"
               id="importTemplateAlgs"
@@ -140,36 +141,38 @@
               Add
             </button>
           </div>
-          <fieldset class="algorithm default">
-            <div class="algTopRow">
-              <input type="text" class="title" value="Hello World" />
-              <button class="makeTextareaFullscreen">
-                <i class="fa fa-expand" aria-hidden="true"></i>
-              </button>
-              <button class="deleteAlg">
-                <i class="fa fa-trash" aria-hidden="true"></i>
-              </button>
-            </div>
-            <textarea
-              placeholder="// Write code here and paste it into the editor on pbinfo.ro
-    // Accepts any programming language
-    //
-    // Scrie cod aici și lipește-l în editor-ul de pe pbinfo.ro
-    // Acceptă orice limbaj de programare"
-            >
-#include &#60;iostream&#62;
-
-using namespace std;
-
-int main()
-{
-  cout &#60;&#60; "Hello World!" &#60;&#60; endl;
-}</textarea
-            >
-          </fieldset>
+          <div id="algFieldsetContainer">
+            <fieldset class="algorithm default scale-in-out inView">
+              <div class="algTopRow">
+                <input type="text" class="title" value="Hello World" />
+                <button class="makeTextareaFullscreen">
+                  <i class="fa fa-expand" aria-hidden="true"></i>
+                </button>
+                <button class="deleteAlg">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+              </div>
+              <textarea
+                placeholder="// Write code here and paste it into the editor on pbinfo.ro
+      // Accepts any programming language
+      //
+      // Scrie cod aici și lipește-l în editor-ul de pe pbinfo.ro
+      // Acceptă orice limbaj de programare"
+              >
+  #include &#60;iostream&#62;
+  
+  using namespace std;
+  
+  int main()
+  {
+    cout &#60;&#60; "Hello World!" &#60;&#60; endl;
+  }</textarea
+              >
+            </fieldset>
+          </div>
         </div>
       </div>
-      <div id="cssConfig" class="setting button">
+      <div id="cssConfig" class="setting button scale-in-out">
         <div class="label" id="closeCSS">
           <i class="fa fa-gear label-icon" aria-hidden="true"></i>
           Configure Custom CSS
@@ -186,7 +189,7 @@ int main()
       <br />
       <hr />
       <div class="description">
-        <p class="centerText">
+        <p class="centerText scale-in-out">
           <a href="https://www.github.com/MXB683/PBInfoStyles">PBS</a>
           is an open-source project available on GitHub.
           <br />
@@ -197,7 +200,7 @@ int main()
           >
         </p>
         <hr />
-        <p class="centerText">
+        <p class="centerText scale-in-out">
           <a
             href="https://www.github.com/MXB683/PBInfoStyles"
             title="PBInfoStyles"
@@ -215,8 +218,8 @@ int main()
           <a href="https://www.pbinfo.ro" target="_blank">PBinfo</a> in any way.
         </p>
         <hr />
-        <p class="centerText">All Rights Reserved &copy; 2025</p>
-        <button class="w100" id="refreshPBI">
+        <p class="centerText scale-in-out">All Rights Reserved &copy; 2025</p>
+        <button class="w100 scale-in-out" id="refreshPBI">
           <i class="fa fa-sync" aria-hidden="true"></i>
           Refresh PBInfo
         </button>

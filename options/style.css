@@ -28,6 +28,8 @@ button {
   border-radius: 1rem;
   border: none;
   background-color: rgba(255, 255, 255, 0.3);
+  scale: 1;
+  transition: all 0.2s ease-in-out;
 
   &.setting {
     width: 100%;
@@ -223,11 +225,8 @@ hr {
 
     button {
       width: calc(100% - 1.5rem);
-      transition: all 0.2s ease-in-out;
 
       &:hover {
-        transition: filter 0.2s ease-in-out;
-        filter: brightness(0.8);
         cursor: pointer;
       }
     }
@@ -284,13 +283,7 @@ hr {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: filter 0.2s ease-in-out;
     width: 100% !important;
-
-    &:hover {
-      transition: filter 0.2s ease-in-out;
-      filter: brightness(0.8);
-    }
 
     &:first-child {
       border-top-right-radius: 0;
@@ -352,14 +345,9 @@ textarea {
     padding: 0.5rem;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    transition: filter 0.2s ease-in-out;
 
     &.makeTextareaFullscreen {
       border-radius: 0;
-    }
-    &:hover {
-      transition: filter 0.2s ease-in-out;
-      filter: brightness(0.8);
     }
   }
 }
@@ -384,13 +372,7 @@ textarea {
     cursor: pointer;
     width: 3rem;
     height: 3rem;
-    transition: filter 0.2s ease-in-out;
     z-index: 1002;
-
-    &:hover {
-      transition: filter 0.2s ease-in-out;
-      filter: brightness(0.8);
-    }
   }
 
   #fullscreenTitle {
@@ -435,12 +417,6 @@ textarea {
 #saveCss {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  transition: filter 0.2s ease-in-out;
-  &:hover {
-    cursor: pointer;
-    transition: filter 0.2s ease-in-out;
-    filter: brightness(0.8);
-  }
 }
 
 .centerText {
@@ -455,17 +431,11 @@ textarea {
   cursor: pointer;
   display: flex;
   justify-content: center;
-  transition: filter 0.2s ease-in-out;
 
   i {
     color: #475c64;
     font-size: 1.5rem;
     margin-right: 0.5rem;
-  }
-
-  &:hover {
-    transition: filter 0.2s ease-in-out;
-    filter: brightness(0.8);
   }
 }
 
@@ -505,5 +475,34 @@ header {
     background-color: rgba(42, 123, 155, 0.5);
     align-self: center;
     margin: 0 0.5rem;
+  }
+}
+
+.scale-in-out {
+  scale: 0.1;
+  transition: all 0.3s ease-in-out !important;
+}
+
+.scale-in-out.inView,
+.scale-in-out.setting.button.active {
+  scale: 1;
+  transition: all 0.3s ease-in-out !important;
+}
+
+button {
+  scale: 1;
+  transition: all 0.2s ease-in-out !important;
+  filter: brightness(1) !important;
+
+  &:hover {
+    scale: 1.03;
+    transition: all 0.2s ease-in-out !important;
+    filter: brightness(0.9) !important;
+    cursor: pointer;
+  }
+
+  &:active {
+    scale: 0.75;
+    transition: all 0.1s ease-in-out !important;
   }
 }

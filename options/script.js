@@ -1,3 +1,14 @@
+const intersectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    entry.target.classList.toggle("inView", entry.isIntersecting);
+  });
+});
+
+document.querySelectorAll(".scale-in-out").forEach((element) => {
+  element.classList.add("inView");
+  intersectionObserver.observe(element);
+});
+
 document.querySelectorAll(".setting.text").forEach((element) => {
   element.addEventListener("click", () => {
     element.querySelector("input[type='text']").focus();

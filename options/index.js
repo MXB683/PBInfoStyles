@@ -20,21 +20,38 @@ document.getElementById("fontLink").addEventListener("change", () => {
   });
 });
 
-setInterval(() => {
-  let algorithmNodes = document.querySelectorAll("#algs > fieldset.algorithm");
+const algorithmChildListObserver = new MutationObserver(async () => {
   let algorithms = [];
+  await chrome.storage.sync.get({ algorithms: [] }, (items) => {
+    algorithms = items.algorithms;
+  });
+  console.log("Saving algorithms...");
+  console.log(algorithms);
+  console.log("------------");
+
+  let algorithmNodes = document.querySelectorAll(
+    "#algFieldsetContainer fieldset.algorithm"
+  );
   algorithmNodes.forEach((element) => {
-    try {
-      algorithms.push({
-        title: `${element.querySelector("input.title").value}`,
-        algorithm: `${element.querySelector("textarea").value}`,
-      });
-    } catch (error) {
-      console.log(error);
+    if (
+      algorithms.find(
+        (e) => e.title === element.querySelector("input.title").value
+      )
+    ) {
+      console.log(
+        "Already included",
+        element.querySelector("input.title").value
+      );
+      return;
     }
+    intersectionObserver.observe(element);
+    algorithms.push({
+      title: `${element.querySelector("input.title").value}`,
+      algorithm: `${element.querySelector("textarea").value}`,
+    });
   });
   chrome.storage.sync.set({ algorithms });
-}, 200);
+});
 
 const restore = () => {
   chrome.storage.sync.get(
@@ -43,7 +60,7 @@ const restore = () => {
       fontLigatures: true,
       font: "JetBrains Mono",
       fontLink: "https://fonts.cdnfonts.com/css/jetbrains-mono",
-      algorithms: [{}],
+      algorithms: [],
       autoAuth: {
         enabled: false,
       },
@@ -55,7 +72,7 @@ const restore = () => {
         fontLigatures: true,
         font: "JetBrains Mono",
         fontLink: "https://fonts.cdnfonts.com/css/jetbrains-mono",
-        algorithms: [{}],
+        algorithms: [],
         autoAuth: {
           enabled: false,
         },
@@ -78,11 +95,18 @@ const restore = () => {
       // Algorithms
       items.algorithms.forEach((element) => {
         document
-          .getElementById("algs")
+          .getElementById("algFieldsetContainer")
           .appendChild(
             new AlgorithmNode(`%${element.title}%\n${element.algorithm}`)
           );
       });
+      algorithmChildListObserver.observe(
+        document.getElementById("algFieldsetContainer"),
+        {
+          childList: true,
+          subtree: true,
+        }
+      );
     }
   );
 };
@@ -92,7 +116,7 @@ document.getElementById("importTemplateAlgs").addEventListener("click", () => {
     .querySelectorAll("fieldset.algorithm.default")
     .forEach((e) => e.remove());
   cppAlgorithms.forEach((alg) =>
-    document.getElementById("algs").appendChild(alg)
+    document.getElementById("algFieldsetContainer").appendChild(alg)
   );
 });
 
@@ -104,11 +128,11 @@ document.getElementById("addAlg").addEventListener("click", () => {
   let node = new AlgorithmNode("%New Algorithm%\n// Code here");
   node.innerHTML = node.innerHTML.replace("New Algorithm", "");
   node.innerHTML = node.innerHTML.replace("// Code here", "");
-  document.getElementById("algs").appendChild(node);
+  document.getElementById("algFieldsetContainer").appendChild(node);
 });
 
-const saveButton = document.getElementById("autoAuth-save");
-saveButton.addEventListener("click", () => {
+const autoAuthSaveButton = document.getElementById("autoAuth-save");
+autoAuthSaveButton.addEventListener("click", () => {
   const username = document.getElementById("autoAuth-username").value;
   const password = document.getElementById("autoAuth-password").value;
   chrome.storage.sync.set(
@@ -120,11 +144,9 @@ saveButton.addEventListener("click", () => {
       },
     },
     () => {
-      saveButton.innerHTML = "Saved credentials";
-      saveButton.style.backgroundColor = "rgb(0, 255, 128)";
+      autoAuthSaveButton.innerHTML = "Saved";
       setTimeout(() => {
-        saveButton.innerHTML = "Save credentials";
-        saveButton.style.backgroundColor = "rgb(240, 240, 240)";
+        autoAuthSaveButton.innerHTML = "Save credentials";
       }, 2000);
     }
   );
