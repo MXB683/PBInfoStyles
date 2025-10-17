@@ -284,17 +284,14 @@ hr {
     align-items: center;
     justify-content: center;
     width: 100% !important;
-
-    &:first-child {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-    &:nth-child(2) {
-      border-radius: 0;
-    }
+    border-radius: 0;
     &:last-child {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
+      border-top-right-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+    } 
+    &:first-child {
+      border-top-left-radius: 1rem;
+      border-bottom-left-radius: 1rem;
     }
   }
 

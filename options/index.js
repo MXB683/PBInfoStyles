@@ -20,14 +20,11 @@ document.getElementById("fontLink").addEventListener("change", () => {
   });
 });
 
-const algorithmChildListObserver = new MutationObserver(async () => {
+const saveAlgs = (async () => {
   let algorithms = [];
   await chrome.storage.sync.get({ algorithms: [] }, (items) => {
     algorithms = items.algorithms;
   });
-  console.log("Saving algorithms...");
-  console.log(algorithms);
-  console.log("------------");
 
   let algorithmNodes = document.querySelectorAll(
     "#algFieldsetContainer fieldset.algorithm"
@@ -38,20 +35,24 @@ const algorithmChildListObserver = new MutationObserver(async () => {
         (e) => e.title === element.querySelector("input.title").value
       )
     ) {
-      console.log(
-        "Already included",
-        element.querySelector("input.title").value
-      );
       return;
     }
-    intersectionObserver.observe(element);
     algorithms.push({
       title: `${element.querySelector("input.title").value}`,
       algorithm: `${element.querySelector("textarea").value}`,
     });
   });
-  chrome.storage.sync.set({ algorithms });
+  chrome.storage.sync.set({ algorithms }, () => {
+    document.getElementById("saveAlgsIcon").classList.remove("fa-floppy-disk");
+    document.getElementById("saveAlgsIcon").classList.add("fa-check");
+    setTimeout(() => {
+      document.getElementById("saveAlgsIcon").classList.remove("fa-check");
+      document.getElementById("saveAlgsIcon").classList.add("fa-floppy-disk");
+    }, 500);
+  });
 });
+
+document.getElementById("saveAlgs").addEventListener("click", saveAlgs);
 
 const restore = () => {
   chrome.storage.sync.get(
@@ -91,13 +92,6 @@ const restore = () => {
             new AlgorithmNode(`%${element.title}%\n${element.algorithm}`)
           );
       });
-      algorithmChildListObserver.observe(
-        document.getElementById("algFieldsetContainer"),
-        {
-          childList: true,
-          subtree: true,
-        }
-      );
     }
   );
 };
@@ -119,7 +113,7 @@ document.getElementById("addAlg").addEventListener("click", () => {
   let node = new AlgorithmNode("%New Algorithm%\n// Code here");
   node.innerHTML = node.innerHTML.replace("New Algorithm", "");
   node.innerHTML = node.innerHTML.replace("// Code here", "");
-  document.getElementById("algFieldsetContainer").appendChild(node);
+  intersectionObserver.observe(document.getElementById("algFieldsetContainer").appendChild(node));
 });
 
 const autoAuthSaveButton = document.getElementById("autoAuth-save");
