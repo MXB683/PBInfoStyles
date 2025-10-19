@@ -1,5 +1,5 @@
 :root {
-  --glow-color: #a8a8a8;
+  --cubic-in: cubic-bezier(0.55, 0.06, 0.68, 0.19);
 }
 
 #meniu-navigare-li-notificari-noi,
@@ -9,13 +9,9 @@ li > a[href="/logout.php"][title="Deconectare"],
   display: none;
 }
 
-a:hover {
-  text-decoration: none !important;
-}
-
 progress[value] {
   --color: rgb(48, 114, 171);
-  --background: #272a2b;
+  --background: #272a2b77;
 
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -24,6 +20,7 @@ progress[value] {
   width: 200px;
   margin: 0 10px;
   border-radius: 10em;
+  border: 1px var(--color) solid;
   background: var(--background);
 }
 
@@ -86,24 +83,14 @@ a:hover svg {
   fill: #ffffff;
 }
 
-li:hover,
-#bara_navigare > div > a:hover,
-button:hover,
-a:hover {
-  animation: startglow 500ms;
-  filter: drop-shadow(0 0 20px var(--glow-color));
-  z-index: 9999;
-}
-
-@keyframes startglow {
-  0% {
-    filter: drop-shadow(0 0 0 var(--glow-color));
-  }
-  10% {
-    filter: drop-shadow(0 0 10px var(--glow-color));
-  }
-  100% {
-    filter: drop-shadow(0 0 20px var(--glow-color));
+li:not(.dropdown) {
+  transition: all 0.15s var(--cubic-in);
+  &:hover:not(.no-pbs-hover) {
+    transition: all 0.3s var(--cubic-in);
+    transform: scale(1.1);
+    border-radius: inherit;
+    border-width: 1px;
+    z-index: 9999;
   }
 }
 

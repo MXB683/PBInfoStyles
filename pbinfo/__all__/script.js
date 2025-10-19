@@ -315,20 +315,32 @@ document.getElementById("footer").appendChild(document.createElement("hr"));
 document.getElementById("footer").appendChild(watermark);
 
 // ANCHOR - Scroll Animations
-if (items.scrollAnimations) {
-  const intersectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      entry.target.classList.toggle("inView", entry.isIntersecting);
+const intersectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    entry.target.classList.toggle("inView", entry.isIntersecting);
+  });
+});
+
+chrome.storage.sync.get("scrollAnimations").then((result) => {
+  if (result.scrollAnimations) {
+    const exceptionSelectors = [
+      "#bara_navigare",
+      "#header",
+      "#footer",
+      "form-incarcare-solutie",
+    ];
+    let exceptionSelectorString = "script, style";
+    exceptionSelectors.forEach((selector) => {
+      exceptionSelectorString += `, ${selector}, ${selector} *`;
     });
-  });
-  
-  const scrollAnimItems = document.querySelectorAll(
-    "*:not(script, style, #bara_navigare, #bara_navigare *, #footer, #footer *, #form-incarcare-solutie *)"
-  );
-  
-  scrollAnimItems.forEach((element) => {
-    element.classList.add("scrollAnimation");
-    element.classList.add("inView");
-    intersectionObserver.observe(element);
-  });
-}
+    const scrollAnimItems = document.querySelectorAll(
+      `*:not(${exceptionSelectorString})`
+    );
+
+    scrollAnimItems.forEach((element) => {
+      element.classList.add("scrollAnimation");
+      element.classList.add("inView");
+      intersectionObserver.observe(element);
+    });
+  }
+});

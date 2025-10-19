@@ -20,7 +20,7 @@ document.getElementById("fontLink").addEventListener("change", () => {
   });
 });
 
-const saveAlgs = (async () => {
+const saveAlgs = async () => {
   let algorithms = [];
   await chrome.storage.sync.get({ algorithms: [] }, (items) => {
     algorithms = items.algorithms;
@@ -50,7 +50,7 @@ const saveAlgs = (async () => {
       document.getElementById("saveAlgsIcon").classList.add("fa-floppy-disk");
     }, 500);
   });
-});
+};
 
 document.getElementById("saveAlgs").addEventListener("click", saveAlgs);
 
@@ -67,6 +67,7 @@ const restore = () => {
       },
       replaceCustomCharacters: false,
       scrollAnimations: false,
+      oldProblemsPage: false,
     },
     (items) => {
       console.log(items);
@@ -84,6 +85,8 @@ const restore = () => {
           .classList.add("active");
       if (items.scrollAnimations)
         document.getElementById("scrollAnimations").classList.add("active");
+      if (items.oldProblemsPage)
+        document.getElementById("oldProblemsPage").classList.add("active");
       // Algorithms
       items.algorithms.forEach((element) => {
         document
@@ -113,7 +116,9 @@ document.getElementById("addAlg").addEventListener("click", () => {
   let node = new AlgorithmNode("%New Algorithm%\n// Code here");
   node.innerHTML = node.innerHTML.replace("New Algorithm", "");
   node.innerHTML = node.innerHTML.replace("// Code here", "");
-  intersectionObserver.observe(document.getElementById("algFieldsetContainer").appendChild(node));
+  intersectionObserver.observe(
+    document.getElementById("algFieldsetContainer").appendChild(node)
+  );
 });
 
 const autoAuthSaveButton = document.getElementById("autoAuth-save");
