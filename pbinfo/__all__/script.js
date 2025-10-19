@@ -344,3 +344,8 @@ chrome.storage.sync.get("scrollAnimations").then((result) => {
     });
   }
 });
+
+setTimeout(() => {
+  document.getElementById("navigare-li-probleme").style =
+    "margin: 0 0 0 1rem !important;";
+}, 100);

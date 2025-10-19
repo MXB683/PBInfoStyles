@@ -50,3 +50,19 @@ chrome.storage.sync.get({ enableIcons: true }, (items) => {
       "Aici ai probleme!"
     );
 });
+
+document
+  .querySelector(
+    "#zona-mijloc > div > div.row.mt-2 > div.col-md-8 > div.border.rounded.bg-secondary-subtle.p-3.center.mb-3"
+  )
+  .remove();
+document
+  .querySelector(
+    "#zona-mijloc > div > div.row.mt-2 > div.col-md-8 > div:nth-child(1) > div:nth-child(2) > a.btn.btn-info.btn-sm"
+  )
+  .classList.remove("btn-sm");
+document
+  .querySelector(
+    "#zona-mijloc > div > div.row.mt-2 > div.col-md-8 > div:nth-child(1) > div:nth-child(2) > a.ms-3"
+  )
+  .classList.add("btn", "btn-secondary");

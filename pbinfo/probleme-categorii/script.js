@@ -15,6 +15,7 @@ chrome.storage.sync.get("oldProblemsPage").then((result) => {
         if (total && solved) {
           const progressBar = document.createElement("progress");
           progressBar.value = Math.max(8, (solved / total) * 100);
+          if (solved == 0) progressBar.value = 0;
           progressBar.max = 100;
           element.appendChild(progressBar);
           clearInterval(interval);

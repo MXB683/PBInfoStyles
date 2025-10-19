@@ -83,15 +83,19 @@ a:hover svg {
   fill: #ffffff;
 }
 
-li:not(.dropdown) {
+.list-group-item:not(.dropdown) {
   transition: all 0.15s var(--cubic-in);
   &:hover:not(.no-pbs-hover) {
     transition: all 0.3s var(--cubic-in);
-    transform: scale(1.1);
+    transform: scaleX(1.1);
     border-radius: inherit;
     border-width: 1px;
     z-index: 9999;
   }
+}
+
+#navigare-li-solutii:hover {
+  transform: scaleX(1) !important;
 }
 
 ul.dropdown-menu.show {
@@ -152,5 +156,59 @@ li:hover .pbs_tooltip {
   &.inView {
     scale: inherit;
     transition: all 0.3s ease-in-out;
+  }
+}
+
+.card {
+  background: #00000055 !important;
+  border: 0 !important;
+  border-radius: 20px !important;
+  transition: all 0.15s ease-in-out;
+  padding: 1rem !important;
+
+  .card-header,
+  .card-body,
+  .card-footer {
+    background-color: transparent !important;
+    border: 0 !important;
+  }
+
+  &:hover {
+    box-shadow: 0 8px 32px 0 #00000099;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: all 0.15s ease-in-out;
+  }
+}
+
+.list-group-item {
+  background: #00000055 !important;
+
+  &:hover {
+    z-index: 9999;
+  }
+}
+
+.list-group {
+  transition: all 0.15s ease-in-out;
+  border-radius: 20px !important;
+
+  &:hover {
+    box-shadow: 0 8px 32px 0 #00000099;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(8.5px);
+    transition: all 0.15s ease-in-out;
+  }
+}
+
+.btn-light {
+  background-color: #ffffff55 !important;
+  transition: background-color 0.3s ease-in-out;
+  border: 0 !important;
+  color: white !important;
+
+  &:hover {
+    background-color: #ffffff44 !important;
+    transition: background-color 0.3s ease-in-out;
   }
 }
