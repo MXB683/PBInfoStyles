@@ -324,24 +324,30 @@ const intersectionObserver = new IntersectionObserver((entries) => {
 chrome.storage.sync.get("scrollAnimations").then((result) => {
   if (result.scrollAnimations) {
     const exceptionSelectors = [
-      "#bara_navigare",
-      "#header",
-      "#footer",
-      "form-incarcare-solutie",
+      // selector, include children?
+      ["#bara_navigare", true],
+      ["#header", true],
+      ["#footer", true],
+      ["#form-incarcare-solutie", true],
+      ["#modal_login", false],
     ];
-    let exceptionSelectorString = "script, style";
+    let exceptionSelectorString = "html, head, body, script, style";
     exceptionSelectors.forEach((selector) => {
-      exceptionSelectorString += `, ${selector}, ${selector} *`;
+      exceptionSelectorString += `, ${selector[0]}`;
+      if (selector[1]) {
+        exceptionSelectorString += `, ${selector[0]} *`;
+      }
     });
-    const scrollAnimItems = document.querySelectorAll(
-      `*:not(${exceptionSelectorString})`
-    );
-
-    scrollAnimItems.forEach((element) => {
-      element.classList.add("scrollAnimation");
-      element.classList.add("inView");
-      intersectionObserver.observe(element);
-    });
+    console.log(exceptionSelectorString);
+    document
+      .querySelectorAll(
+        `body > div:first-child :not(${exceptionSelectorString})`
+      )
+      .forEach((element) => {
+        element.classList.add("scrollAnimation");
+        element.classList.add("inView");
+        intersectionObserver.observe(element);
+      });
   }
 });
 

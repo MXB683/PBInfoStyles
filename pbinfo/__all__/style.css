@@ -151,10 +151,12 @@ li:hover .pbs_tooltip {
 
 .scrollAnimation {
   transition: all 0.3s ease-in-out;
-  scale: 0.5;
+  transform: translateX(-10px);
+  opacity: 0.5;
 
   &.inView {
-    scale: inherit;
+    transform: inherit;
+    opacity: inherit;
     transition: all 0.3s ease-in-out;
   }
 }
@@ -211,4 +213,8 @@ li:hover .pbs_tooltip {
     background-color: #ffffff44 !important;
     transition: background-color 0.3s ease-in-out;
   }
+}
+
+body {
+  padding: 0 !important;
 }
