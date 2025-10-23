@@ -1,5 +1,5 @@
 :root {
-  --cubic-in: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+  --li-animation-easing: cubic-bezier(0.22,0.61,0.36,1.00);
 }
 
 #meniu-navigare-li-notificari-noi,
@@ -83,14 +83,24 @@ a:hover svg {
   fill: #ffffff;
 }
 
-.list-group-item:not(.dropdown) {
-  transition: all 0.15s var(--cubic-in);
-  &:hover:not(.no-pbs-hover) {
-    transition: all 0.3s var(--cubic-in);
+.list-group-item:not(.dropdown.no-pbs-hover) {
+  transition: all 0.15s var(--li-animation-easing);
+  &:hover {
+    transition: all 0.3s var(--li-animation-easing);
     transform: scaleX(1.1);
     border-radius: inherit;
     border-width: 1px;
     z-index: 9999;
+  }
+
+  & > * {
+    transition: all 0.15s var(--li-animation-easing);
+    transform: scaleX(1);
+  }
+
+  &:hover > * {
+    transition: all 0.3s var(--li-animation-easing);
+    transform: scaleX(calc(1 / 1.1));
   }
 }
 

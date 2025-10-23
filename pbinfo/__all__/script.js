@@ -338,7 +338,6 @@ chrome.storage.sync.get("scrollAnimations").then((result) => {
         exceptionSelectorString += `, ${selector[0]} *`;
       }
     });
-    console.log(exceptionSelectorString);
     document
       .querySelectorAll(
         `body > div:first-child :not(${exceptionSelectorString})`
