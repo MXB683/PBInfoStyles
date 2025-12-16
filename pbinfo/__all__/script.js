@@ -1,5 +1,18 @@
 "use strict";
 
+const streakSettings = Object.freeze({
+  solvedToday: "🔥",
+  notSolvedToday: "❄️",
+  notSolvedUrgent: "🧊",
+  urgentThreshold: 16, // hours
+});
+
+const user = document
+  .querySelector(
+    "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:first-child > a"
+  )
+  .textContent.trim();
+
 chrome.storage.sync.get(
   {
     enableIcons: true,
@@ -14,23 +27,10 @@ chrome.storage.sync.get(
     },
     replaceCustomCharacters: false,
     customCSS: true,
+    doStreaks: true,
+    streakProfiles: {}, // streakProfiles["username"] = { currentStreak: int, lastSolvedDate: "YYYY-MM-DD" }
   },
-  (
-    items = {
-      enableIcons: true,
-      fontLigatures: true,
-      font: "JetBrains Mono",
-      fontLink: "@import url('https://fonts.cdnfonts.com/css/jetbrains-mono');",
-      profilePictureSource: "",
-      autoAuth: {
-        enabled: false,
-        username: "",
-        password: "",
-      },
-      replaceCustomCharacters: false,
-      customCSS: true,
-    }
-  ) => {
+  (items) => {
     // ANCHOR - Login automatically
     try {
       if (
@@ -93,6 +93,48 @@ chrome.storage.sync.get(
         </div>
       `;
     }
+
+    // SECTION - Streaks
+    if (items.doStreaks) {
+      let userProfile = { currentStreak: 0, lastSolvedDate: "1970-01-01" };
+      let streakProfiles = {};
+      Object.entries(items.streakProfiles).forEach(([username, profile]) => {
+        if (!profile.currentStreak) profile.currentStreak = 0;
+        if (!profile.lastSolvedDate) profile.lastSolvedDate = "1970-01-01";
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        const lastSolvedDate = new Date(profile.lastSolvedDate);
+        if (lastSolvedDate < yesterday) {
+          profile.currentStreak = 0;
+        }
+        streakProfiles[username] = profile;
+        if (user === username) userProfile = profile;
+      });
+      chrome.storage.sync.set({ streakProfiles });
+
+      // ANCHOR - Display streak indicator
+      if (userProfile.currentStreak >= 3) {
+        const indicatorParent = document.querySelector(
+          "#navbarPrincipal > :last-child"
+        );
+        const indicator = document.createElement("li");
+        indicator.classList.add("nav-item");
+        indicator.style.marginRight = "1rem";
+        indicator.style.cursor = "default";
+        indicator.style.userSelect = "none";
+        indicator.textContent = `${userProfile.currentStreak}${
+          userProfile.lastSolvedDate === new Date().toISOString().split("T")[0]
+            ? streakSettings.solvedToday
+            : new Date().getHours() > streakSettings.urgentThreshold
+            ? streakSettings.notSolvedUrgent
+            : streakSettings.notSolvedToday
+        }`;
+
+        indicatorParent.prepend(indicator);
+        indicatorParent.style.display = "contents";
+      }
+    }
+    // !SECTION - Streaks
 
     // ANCHOR Enable Icons
     if (items.enableIcons) {
@@ -273,25 +315,6 @@ chrome.storage.sync.get(
       }, 100);
     }
 
-    // cuz y not
-    try {
-      if (
-        document
-          .querySelector(
-            "body > div:nth-child(2) > div.bg-primary > div > div > div.col-lg-10.col-md-9.col-sd-8 > p.very-big"
-          )
-          .innerHTML.includes("Aici ai probleme!")
-      ) {
-        document.querySelector(
-          "body > div:nth-child(2) > div.bg-primary > div > div > div.col-lg-10.col-md-9.col-sd-8 > p.very-big"
-        ).innerHTML = document
-          .querySelector(
-            "body > div:nth-child(2) > div.bg-primary > div > div > div.col-lg-10.col-md-9.col-sd-8 > p.very-big"
-          )
-          .innerHTML.replace(/ De informatic[a|ă] :\)/, "");
-      }
-    } catch (_) {}
-
     // ANCHOR Remove top colored bar
     setInterval(() => {
       document.querySelector("#bara_navigare").style.borderWidth = "0";
@@ -351,6 +374,6 @@ chrome.storage.sync.get("scrollAnimations").then((result) => {
 });
 
 setTimeout(() => {
-  document.getElementById("navigare-li-probleme").style =
-    "margin: 0 0 0 1rem !important;";
+  document.getElementById("navigare-li-probleme").style.margin =
+    "0 0 0 1rem !important;";
 }, 100);

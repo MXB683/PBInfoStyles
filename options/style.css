@@ -288,7 +288,7 @@ hr {
     &:last-child {
       border-top-right-radius: 1rem;
       border-bottom-right-radius: 1rem;
-    } 
+    }
     &:first-child {
       border-top-left-radius: 1rem;
       border-bottom-left-radius: 1rem;
@@ -502,4 +502,14 @@ button {
     scale: 0.75;
     transition: all 0.1s ease-in-out !important;
   }
+}
+
+.beta {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+  background-color: #ff933a;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  margin-left: 0.5rem;
 }

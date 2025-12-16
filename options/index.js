@@ -68,6 +68,7 @@ const restore = () => {
       replaceCustomCharacters: false,
       scrollAnimations: false,
       oldProblemsPage: false,
+      doStreaks: false,
     },
     (items) => {
       console.log(items);
@@ -87,6 +88,8 @@ const restore = () => {
         document.getElementById("scrollAnimations").classList.add("active");
       if (items.oldProblemsPage)
         document.getElementById("oldProblemsPage").classList.add("active");
+      if (items.doStreaks)
+        document.getElementById("doStreaks").classList.add("active");
       // Algorithms
       items.algorithms.forEach((element) => {
         document
