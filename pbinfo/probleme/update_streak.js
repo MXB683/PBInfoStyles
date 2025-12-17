@@ -24,24 +24,19 @@ window.addEventListener("solutionData", (event) => {
        */
       const sources = data.surse;
       const today = new Date().toISOString().split("T")[0];
-      const corectSource = sources[0];
-      if (!corectSource) return;
-      const corectDate = corectSource.ora_upload.split(" ")[0];
-      if (!items.streakProfiles[corectSource.user.user])
-        items.streakProfiles[corectSource.user.user] = {
-          currentStreak: 0,
-          lastSolvedDate: "1970-01-01",
-        };
+      const correctSource = sources[0];
+      if (!correctSource) return;
+      if (correctSource.scor < 100) return;
+      if (!sources.slice(1).every((source) => source.scor < 100)) return;
+      if (correctSource.status !== "complete") return;
+
       if (
-        corectDate === today &&
-        sources.slice(1).every((source) => source.scor < 100) &&
-        items.streakProfiles[corectSource.user.user].lastSolvedDate !== today
-      ) {
-        items.streakProfiles[corectSource.user.user].currentStreak += 1;
-        items.streakProfiles[corectSource.user.user].lastSolvedDate = today;
-        chrome.storage.sync.set({ streakProfiles: items.streakProfiles });
-        window.dispatchEvent(new CustomEvent("updateStreak"));
-      }
+        items.streakProfiles[correctSource.user.user].lastSolvedDate === today
+      )
+        return;
+      items.streakProfiles[correctSource.user.user].currentStreak += 1;
+      items.streakProfiles[correctSource.user.user].lastSolvedDate = today;
+      chrome.storage.sync.set({ streakProfiles: items.streakProfiles });
     }
   );
 });

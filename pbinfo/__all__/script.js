@@ -99,6 +99,8 @@ chrome.storage.sync.get(
       let userProfile = { currentStreak: 0, lastSolvedDate: "1970-01-01" };
       let streakProfiles = {};
       Object.entries(items.streakProfiles).forEach(([username, profile]) => {
+        if (username === user && !profile)
+          profile = { currentStreak: 0, lastSolvedDate: "1970-01-01" };
         if (!profile.currentStreak) profile.currentStreak = 0;
         if (!profile.lastSolvedDate) profile.lastSolvedDate = "1970-01-01";
         const yesterday = new Date();
