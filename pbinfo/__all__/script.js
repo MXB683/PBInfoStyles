@@ -5,7 +5,7 @@ const streakSettings = Object.freeze({
   notSolvedToday: "❄️",
   notSolvedUrgent: "🧊",
   urgentThreshold: 18, // hours
-  minCount: 1,
+  minCount: 3,
 });
 
 const user =
