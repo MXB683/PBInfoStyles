@@ -19,6 +19,7 @@ window.addEventListener("solutionData", (event) => {
     },
     async (items = { doStreaks: true, streakProfiles: {} }) => {
       if (!items.doStreaks) return;
+      if (!items.streakProfiles) return;
       /**
        * @type {Array<{}>}
        */
@@ -29,9 +30,19 @@ window.addEventListener("solutionData", (event) => {
       if (correctSource.scor < 100) return;
       if (!sources.slice(1).every((source) => source.scor < 100)) return;
       if (correctSource.status !== "complete") return;
-
       if (
+        correctSource.ora_upload.split(" ")[0] !== today ||
         items.streakProfiles[correctSource.user.user].lastSolvedDate === today
+      )
+        return;
+
+      const _today = new Date().getDate();
+      const yesterday = new Date();
+      yesterday.setDate(_today - 1);
+      yesterday.setHours(0, 0, 0, 0);
+      if (
+        new Date(items.streakProfiles[correctSource.user.user].lastSolvedDate) <
+        new Date(yesterday)
       )
         return;
       items.streakProfiles[correctSource.user.user].currentStreak += 1;

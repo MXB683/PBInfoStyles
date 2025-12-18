@@ -4,14 +4,27 @@ const streakSettings = Object.freeze({
   solvedToday: "🔥",
   notSolvedToday: "❄️",
   notSolvedUrgent: "🧊",
-  urgentThreshold: 16, // hours
+  urgentThreshold: 18, // hours
+  minCount: 1,
 });
 
-const user = document
-  .querySelector(
-    "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:first-child > a"
-  )
-  .textContent.trim();
+const user =
+  document
+    .querySelector(
+      "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:first-child > a"
+    )
+    .textContent.trim() === "Profesor"
+    ? document
+        .querySelector(
+          "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:nth-child(2) > a"
+        )
+        .textContent.trim()
+    : document
+        .querySelector(
+          "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:first-child > a"
+        )
+        .textContent.trim();
+const loggedIn = user !== "Autentificare";
 
 chrome.storage.sync.get(
   {
@@ -95,27 +108,25 @@ chrome.storage.sync.get(
     }
 
     // SECTION - Streaks
-    if (items.doStreaks) {
-      let userProfile = { currentStreak: 0, lastSolvedDate: "1970-01-01" };
-      let streakProfiles = {};
-      Object.entries(items.streakProfiles).forEach(([username, profile]) => {
-        if (username === user && !profile)
-          profile = { currentStreak: 0, lastSolvedDate: "1970-01-01" };
-        if (!profile.currentStreak) profile.currentStreak = 0;
-        if (!profile.lastSolvedDate) profile.lastSolvedDate = "1970-01-01";
-        const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1);
-        const lastSolvedDate = new Date(profile.lastSolvedDate);
-        if (lastSolvedDate < yesterday) {
-          profile.currentStreak = 0;
-        }
-        streakProfiles[username] = profile;
-        if (user === username) userProfile = profile;
-      });
-      chrome.storage.sync.set({ streakProfiles });
+    if (items.doStreaks && loggedIn) {
+      const userProfile = items.streakProfiles[user] ?? {
+        currentStreak: 0,
+        lastSolvedDate: "1970-01-01",
+      };
+      items.streakProfiles[user] = userProfile;
+
+      const today = new Date().getDate();
+      const yesterday = new Date();
+      yesterday.setDate(today - 1);
+      yesterday.setHours(0, 0, 0, 0);
+      if (new Date(userProfile.lastSolvedDate) < new Date(yesterday)) {
+        userProfile.currentStreak = 0;
+      }
+
+      chrome.storage.sync.set({ streakProfiles: items.streakProfiles });
 
       // ANCHOR - Display streak indicator
-      if (userProfile.currentStreak >= 3) {
+      if (userProfile.currentStreak >= streakSettings.minCount) {
         const indicatorParent = document.querySelector(
           "#navbarPrincipal > :last-child"
         );
