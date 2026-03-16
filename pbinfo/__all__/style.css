@@ -1,230 +1,228 @@
 :root {
-  --li-animation-easing: cubic-bezier(0.22,0.61,0.36,1.00);
+	--li-animation-easing: cubic-bezier(0.22, 0.61, 0.36, 1.00);
 }
 
 #meniu-navigare-li-notificari-noi,
 #meniu-navigare-li-mesaje-noi,
-li > a[href="/logout.php"][title="Deconectare"],
-#adbw > div {
-  display: none;
+li>a[href="/logout.php"][title="Deconectare"],
+#adbw>div {
+	display: none;
 }
 
 progress[value] {
-  --color: rgb(48, 114, 171);
-  --background: #272a2b77;
+	--color: rgb(48, 114, 171);
+	--background: #272a2b77;
 
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: none;
-  width: 200px;
-  margin: 0 10px;
-  border-radius: 10em;
-  border: 1px var(--color) solid;
-  background: var(--background);
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border: none;
+	width: 200px;
+	margin: 0 10px;
+	border-radius: 10em;
+	border: 1px var(--color) solid;
+	background: var(--background);
 }
 
 progress[value]::-webkit-progress-bar {
-  border-radius: 10em;
-  background: var(--background);
+	border-radius: 10em;
+	background: var(--background);
 }
 
 progress[value]::-webkit-progress-value {
-  border-radius: 10em;
-  background: var(--color);
+	border-radius: 10em;
+	background: var(--color);
 }
 
 progress[value]::-moz-progress-bar {
-  border-radius: 10em;
-  background: var(--color);
+	border-radius: 10em;
+	background: var(--color);
 }
 
 label {
-  font-weight: bold;
-  display: block;
+	font-weight: bold;
+	display: block;
 }
 
-#navbar > ul > li,
+#navbar>ul>li,
 .navbar-header {
-  width: 5rem;
-  height: 5rem;
+	width: 5rem;
+	height: 5rem;
 }
 
-#navbar > ul > li:hover,
-.navbar-header > a:hover {
-  background-color: #0a0b0c !important;
-  border-radius: 100rem;
+#navbar>ul>li:hover,
+.navbar-header>a:hover {
+	background-color: #0a0b0c !important;
+	border-radius: 100rem;
 }
 
-#navbar > ul:nth-child(1) > li:nth-child(1) {
-  width: 17rem;
-  &:hover {
-    background-color: transparent !important;
-  }
+#navbar>ul:nth-child(1)>li:nth-child(1) {
+	width: 17rem;
+
+	&:hover {
+		background-color: transparent !important;
+	}
 }
 
 code {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .dropdown-menu {
-  border-width: 0px !important;
+	border-width: 0px !important;
 }
 
 .dropdown-toggle::after {
-  color: transparent;
+	color: transparent;
 }
 
 svg {
-  fill: #929292;
+	fill: #929292;
 }
 
 a:hover svg {
-  fill: #ffffff;
+	fill: #ffffff;
 }
 
 .list-group-item:not(.dropdown.no-pbs-hover) {
-  transition: all 0.15s var(--li-animation-easing);
-  &:hover {
-    transition: all 0.3s var(--li-animation-easing);
-    transform: scaleX(1.1);
-    border-radius: inherit;
-    border-width: 1px;
-    z-index: 9999;
-  }
+	transition: all 0.15s var(--li-animation-easing);
 
-  & > * {
-    transition: all 0.15s var(--li-animation-easing);
-    transform: scaleX(1);
-  }
+	&:hover {
+		transition: all 0.3s var(--li-animation-easing);
+		transform: scaleX(1.1);
+		border-radius: inherit;
+		border-width: 1px;
+		z-index: 9999;
+	}
 
-  &:hover > * {
-    transition: all 0.3s var(--li-animation-easing);
-    transform: scaleX(calc(1 / 1.1));
-  }
+	&>* {
+		transition: all 0.15s var(--li-animation-easing);
+		transform: scaleX(1);
+	}
+
+	&:hover>* {
+		transition: all 0.3s var(--li-animation-easing);
+		transform: scaleX(calc(1 / 1.1));
+	}
 }
 
 #navigare-li-solutii:hover {
-  transform: scaleX(1) !important;
+	transform: scaleX(1) !important;
 }
 
 ul.dropdown-menu.show {
-  margin-top: 0 !important;
+	margin-top: 0 !important;
 }
 
 .CodeMirror {
-  background: #36393d !important;
-  border-color: #495057 !important;
+	background: #36393d !important;
+	border-color: #495057 !important;
 }
 
 .CodeMirror-gutters {
-  background: #2b2c2f !important;
-  border-right: #495057 !important;
+	background: #2b2c2f !important;
+	border-right: #495057 !important;
 }
 
 a.dropdown-toggle.show svg {
-  fill: #ffffff;
+	fill: #ffffff;
 }
 
 .ripple {
-  animation: greenglow 500ms;
+	animation: greenglow 500ms;
 }
 
 @keyframes greenglow {
-  0% {
-    filter: drop-shadow(0 0 0 rgb(157, 255, 157));
-  }
-  20% {
-    filter: drop-shadow(0 0 50px rgb(157, 255, 157));
-  }
-  70% {
-    filter: drop-shadow(0 0 10px rgb(157, 255, 157));
-  }
-  100% {
-    filter: drop-shadow(0 0 0 rgb(157, 255, 157));
-  }
+	0% {
+		filter: drop-shadow(0 0 0 rgb(157, 255, 157));
+	}
+
+	20% {
+		filter: drop-shadow(0 0 50px rgb(157, 255, 157));
+	}
+
+	70% {
+		filter: drop-shadow(0 0 10px rgb(157, 255, 157));
+	}
+
+	100% {
+		filter: drop-shadow(0 0 0 rgb(157, 255, 157));
+	}
 }
 
 thead th,
 tbody th {
-  background-color: #393c3f !important;
-  color: #ffffff !important;
+	background-color: #393c3f !important;
+	color: #ffffff !important;
 }
 
 .pbs_tooltip {
-  display: none;
+	display: none;
 }
 
 li:hover .pbs_tooltip {
-  display: block;
+	display: block;
 }
 
 .scrollAnimation {
-  transition: all 0.3s ease-in-out;
-  transform: translateX(-10px);
-  opacity: 0.5;
+	transition: all 0.3s ease-in-out;
+	transform: translateX(-10px);
+	opacity: 0.5;
 
-  &.inView {
-    transform: inherit;
-    opacity: inherit;
-    transition: all 0.3s ease-in-out;
-  }
+	&.inView {
+		transform: inherit;
+		opacity: inherit;
+		transition: all 0.3s ease-in-out;
+	}
 }
 
 .card {
-  background: #00000055 !important;
-  border: 0 !important;
-  border-radius: 20px !important;
-  transition: all 0.15s ease-in-out;
-  padding: 1rem !important;
+	background: #00000055 !important;
+	border: 0 !important;
+	border-radius: 20px !important;
+	transition: all 0.15s ease-in-out;
+	padding: 1rem !important;
 
-  .card-header,
-  .card-body,
-  .card-footer {
-    background-color: transparent !important;
-    border: 0 !important;
-  }
-
-  &:hover {
-    box-shadow: 0 8px 32px 0 #00000099;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    transition: all 0.15s ease-in-out;
-  }
+	.card-header,
+	.card-body,
+	.card-footer {
+		background-color: transparent !important;
+		border: 0 !important;
+	}
 }
 
 .list-group-item {
-  background: #00000055 !important;
+	background: #00000055 !important;
 
-  &:hover {
-    z-index: 9999;
-  }
+	&:hover {
+		z-index: 9999;
+	}
 }
 
 .list-group {
-  transition: all 0.15s ease-in-out;
-  border-radius: 20px !important;
+	transition: all 0.15s ease-in-out;
+	border-radius: 20px !important;
 
-  &:hover {
-    box-shadow: 0 8px 32px 0 #00000099;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(8.5px);
-    transition: all 0.15s ease-in-out;
-  }
+	&:hover {
+		box-shadow: 0 8px 32px 0 #00000099;
+		backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(8.5px);
+		transition: all 0.15s ease-in-out;
+	}
 }
 
 .btn-light {
-  background-color: #ffffff55 !important;
-  transition: background-color 0.3s ease-in-out;
-  border: 0 !important;
-  color: white !important;
+	background-color: #ffffff55 !important;
+	transition: background-color 0.3s ease-in-out;
+	border: 0 !important;
+	color: white !important;
 
-  &:hover {
-    background-color: #ffffff44 !important;
-    transition: background-color 0.3s ease-in-out;
-  }
+	&:hover {
+		background-color: #ffffff44 !important;
+		transition: background-color 0.3s ease-in-out;
+	}
 }
 
 body {
-  padding: 0 !important;
+	padding: 0 !important;
 }

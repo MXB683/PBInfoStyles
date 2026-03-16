@@ -1,27 +1,19 @@
 "use strict";
 
-const streakSettings = Object.freeze({
-  solvedToday: "🔥",
-  notSolvedToday: "❄️",
-  notSolvedUrgent: "🧊",
-  urgentThreshold: 18, // hours
-  minCount: 3,
-});
-
 const user =
   document
     .querySelector(
-      "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:first-child > a"
+      "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:first-child > a",
     )
     .textContent.trim() === "Profesor"
     ? document
         .querySelector(
-          "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:nth-child(2) > a"
+          "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:nth-child(2) > a",
         )
         .textContent.trim()
     : document
         .querySelector(
-          "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:first-child > a"
+          "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:first-child > a",
         )
         .textContent.trim();
 const loggedIn = user !== "Autentificare";
@@ -41,7 +33,6 @@ chrome.storage.sync.get(
     replaceCustomCharacters: false,
     customCSS: true,
     doStreaks: true,
-    streakProfiles: {}, // streakProfiles["username"] = { currentStreak: int, lastSolvedDate: "YYYY-MM-DD" }
   },
   (items) => {
     // ANCHOR - Login automatically
@@ -50,7 +41,7 @@ chrome.storage.sync.get(
         items.autoAuth.enabled &&
         document
           .querySelector(
-            "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:nth-child(2) > a"
+            "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:nth-child(2) > a",
           )
           .getAttribute("href") === "/?pagina=creare-cont"
       ) {
@@ -58,7 +49,7 @@ chrome.storage.sync.get(
         document.querySelector("#parola_login").value = items.autoAuth.password;
         document
           .querySelector(
-            '#form-login-modal > div.modal-footer > div:nth-child(1) > div > button.btn.btn-primary[type="submit"]'
+            '#form-login-modal > div.modal-footer > div:nth-child(1) > div > button.btn.btn-primary[type="submit"]',
           )
           .click();
 
@@ -75,13 +66,13 @@ chrome.storage.sync.get(
             setTimeout(() => (dialog.innerText += "."), i * 1000 + 750);
             setTimeout(
               () => (dialog.innerText = "Logging in"),
-              i * 1000 + 1000
+              i * 1000 + 1000,
             );
           }
           setTimeout(
             () =>
               (dialog.innerText = "Timed out. Maybe incorrect credentials?"),
-            10_000
+            10_000,
           );
           document.body.appendChild(dialog);
           document.getElementById("login-attempt").showModal();
@@ -107,47 +98,17 @@ chrome.storage.sync.get(
       `;
     }
 
-    // SECTION - Streaks
-    if (items.doStreaks && loggedIn) {
-      const userProfile = items.streakProfiles[user] ?? {
-        currentStreak: 0,
-        lastSolvedDate: "1970-01-01",
-      };
-      items.streakProfiles[user] = userProfile;
-
-      const today = new Date().getDate();
-      const yesterday = new Date();
-      yesterday.setDate(today - 1);
-      yesterday.setHours(0, 0, 0, 0);
-      if (new Date(userProfile.lastSolvedDate) < new Date(yesterday)) {
-        userProfile.currentStreak = 0;
-      }
-
-      chrome.storage.sync.set({ streakProfiles: items.streakProfiles });
-
-      // ANCHOR - Display streak indicator
-      if (userProfile.currentStreak >= streakSettings.minCount) {
-        const indicatorParent = document.querySelector(
-          "#navbarPrincipal > :last-child"
-        );
-        const indicator = document.createElement("li");
-        indicator.classList.add("nav-item");
-        indicator.style.marginRight = "1rem";
-        indicator.style.cursor = "default";
-        indicator.style.userSelect = "none";
-        indicator.textContent = `${userProfile.currentStreak}${
-          userProfile.lastSolvedDate === new Date().toISOString().split("T")[0]
-            ? streakSettings.solvedToday
-            : new Date().getHours() > streakSettings.urgentThreshold
-            ? streakSettings.notSolvedUrgent
-            : streakSettings.notSolvedToday
-        }`;
-
-        indicatorParent.prepend(indicator);
-        indicatorParent.style.display = "contents";
-      }
-    }
-    // !SECTION - Streaks
+    const indicatorParent = document.querySelector(
+      "#navbarPrincipal > :last-child",
+    );
+    const indicator = document.createElement("li");
+    indicator.id = "pbs_streak_indicator";
+    indicator.classList.add("nav-item");
+    indicator.style.marginRight = "1rem";
+    indicator.style.cursor = "default";
+    indicator.style.userSelect = "none";
+    indicatorParent.prepend(indicator);
+    indicatorParent.style.display = "contents";
 
     // ANCHOR Enable Icons
     if (items.enableIcons) {
@@ -167,7 +128,7 @@ chrome.storage.sync.get(
 
       document.querySelector("#search_box").placeholder = "Cautare";
       document.querySelector(
-        "#navbarPrincipal > ul.navbar-nav.me-auto.mb-2.mb-lg-0 > li:nth-child(1)"
+        "#navbarPrincipal > ul.navbar-nav.me-auto.mb-2.mb-lg-0 > li:nth-child(1)",
       ).style.margin = "0 1rem 0 0";
 
       document.querySelector("#navigare-li-probleme > a").innerHTML = `
@@ -219,12 +180,12 @@ chrome.storage.sync.get(
       if (
         !document
           .querySelector(
-            "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:nth-child(2) > a"
+            "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:nth-child(2) > a",
           )
           .href.includes("/?pagina=creare-cont")
       ) {
         document.querySelector(
-          "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:nth-last-child(4) > a"
+          "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:nth-last-child(4) > a",
         ).innerHTML += `
           <img style="
             width: 1.6rem;
@@ -238,7 +199,7 @@ chrome.storage.sync.get(
     setTimeout(() => {
       document
         .querySelectorAll(
-          'code, #enunt pre[contenteditable="true"][editable="true"]'
+          'code, #enunt pre[contenteditable="true"][editable="true"]',
         )
         .forEach((element) => {
           element.removeAttribute("contenteditable");
@@ -339,7 +300,7 @@ chrome.storage.sync.get(
     document.querySelectorAll("th").forEach((element) => {
       element.classList.remove("text-dark");
     });
-  }
+  },
 );
 
 // ANCHOR - Add watermark
@@ -376,7 +337,7 @@ chrome.storage.sync.get("scrollAnimations").then((result) => {
     });
     document
       .querySelectorAll(
-        `body > div:first-child :not(${exceptionSelectorString})`
+        `body > div:first-child :not(${exceptionSelectorString})`,
       )
       .forEach((element) => {
         element.classList.add("scrollAnimation");

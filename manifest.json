@@ -47,6 +47,11 @@
         "https://www.pbinfo.ro/?pagina=probleme-lista&tag=*"
       ],
       "js": ["pbinfo/probleme/categorii/script.js"]
+    },
+    {
+      "matches": ["https://www.pbinfo.ro/*"],
+      "js": ["pbinfo/__all__/streak.js"],
+      "world": "MAIN"
     }
   ],
   "permissions": ["storage", "tabs"],
