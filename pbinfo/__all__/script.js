@@ -107,6 +107,7 @@ chrome.storage.sync.get(
     indicator.style.marginRight = "1rem";
     indicator.style.cursor = "default";
     indicator.style.userSelect = "none";
+    indicator.innerHTML = "?";
     indicatorParent.prepend(indicator);
     indicatorParent.style.display = "contents";
 

@@ -38,10 +38,21 @@ fetch(`/ajx-module/profil/json-jurnal.php?user=${user_autentificat.user}`)
     const solutions = data.content.filter(
       (e) => e.scor >= streakSettings.minScore,
     );
+
+    const solvedFirstOnDate = {};
+    for (const solution of solutions) {
+      if (solvedFirstOnDate[solution.data_upload]) continue;
+      if (
+        solutions.findLast((e) => e.id === solution.id).data_upload !==
+        solution.data_upload
+      )
+        solvedFirstOnDate[solution.data_upload] = false;
+      else solvedFirstOnDate[solution.data_upload] = true;
+    }
+
     function countFrom(date) {
       let streak = 0;
-      for (const solution of solutions) {
-        if (solution.data_upload !== date) break;
+      while (solvedFirstOnDate[date]) {
         streak++;
         date = yesterday(date);
       }
