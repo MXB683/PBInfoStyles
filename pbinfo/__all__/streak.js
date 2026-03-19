@@ -4,7 +4,7 @@ const streakSettings = Object.freeze({
   solvedToday: "🔥",
   notSolvedToday: "🧊",
   minCount: 3,
-  minScore: 90,
+  minScore: 100,
 });
 
 function yesterday(yyyy_mm_dd = new Date().toISOString().split("T")[0]) {
@@ -62,6 +62,8 @@ fetch(`/ajx-module/profil/json-jurnal.php?user=${user_autentificat.user}`)
     const today = new Date().toISOString().split("T")[0];
     const cft = countFrom(today);
     const streak = cft == 0 ? countFrom(yesterday()) : cft;
+
+    if (streak < streakSettings.minCount) return;
 
     document.getElementById("pbs_streak_indicator").innerHTML = `${streak}${
       cft == 0 ? streakSettings.notSolvedToday : streakSettings.solvedToday
