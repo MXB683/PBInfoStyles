@@ -1,3 +1,5 @@
+document.getElementById("year").textContent = new Date().getFullYear();
+
 const intersectionObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     entry.target.classList.toggle("inView", entry.isIntersecting);
@@ -79,7 +81,7 @@ const customCssEditor = CodeMirror.fromTextArea(
     matchBrackets: true,
     lint: true,
     styleActiveLine: true,
-  }
+  },
 );
 
 document.getElementById("refreshPBI").addEventListener("click", () => {
