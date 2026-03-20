@@ -226,3 +226,11 @@ li:hover .pbs_tooltip {
 body {
 	padding: 0 !important;
 }
+
+#bara_navigare {
+	position: relative;
+}
+
+#navigare-li-probleme {
+	margin: 0 !important;
+}

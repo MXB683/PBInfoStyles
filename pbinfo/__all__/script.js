@@ -24,7 +24,6 @@ chrome.storage.sync.get(
     fontLigatures: true,
     font: "JetBrains Mono",
     fontLink: "@import url('https://fonts.cdnfonts.com/css/jetbrains-mono');",
-    profilePictureSource: "",
     autoAuth: {
       enabled: false,
       username: "",
@@ -178,22 +177,14 @@ chrome.storage.sync.get(
         ">Resurse</div>
       `;
 
-      if (
-        !document
-          .querySelector(
-            "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:nth-child(2) > a",
-          )
-          .href.includes("/?pagina=creare-cont")
-      ) {
-        document.querySelector(
-          "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:nth-last-child(4) > a",
-        ).innerHTML += `
-          <img style="
-            width: 1.6rem;
-            border-radius: 100%;
-          " src="${items.profilePictureSource}">
-        `;
-      }
+      document.querySelector(
+        "#navbarPrincipal > ul.navbar-nav.ms-auto.mb-2.mb-lg-0 > li:nth-last-child(4) > a",
+      ).innerHTML += `
+				<img style="
+					width: 1.6rem;
+					border-radius: 100%;
+				" id="pbs_user_icon">
+			`;
     }
 
     // ANCHOR - Copy code elements

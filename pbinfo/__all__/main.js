@@ -63,9 +63,15 @@ fetch(`/ajx-module/profil/json-jurnal.php?user=${user_autentificat.user}`)
     const cft = countFrom(today);
     const streak = cft == 0 ? countFrom(yesterday()) : cft;
 
-    if (streak < streakSettings.minCount) return;
-
-    document.getElementById("pbs_streak_indicator").innerHTML = `${streak}${
-      cft == 0 ? streakSettings.notSolvedToday : streakSettings.solvedToday
-    }`;
+    if (streak < streakSettings.minCount)
+      document.getElementById("pbs_streak_indicator").innerHTML = "";
+    else
+      document.getElementById("pbs_streak_indicator").innerHTML = `${streak}${
+        cft == 0 ? streakSettings.notSolvedToday : streakSettings.solvedToday
+      }`;
   });
+
+setTimeout(() => {
+  document.getElementById("pbs_user_icon").src =
+    `https://gravatar.com/avatar/${user_autentificat.gravatar_hash}?d=wavatar`;
+}, 10);
