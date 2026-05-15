@@ -32,8 +32,21 @@ chrome.storage.sync.get(
     replaceCustomCharacters: false,
     customCSS: true,
     doStreaks: true,
+	top100: [],
+	lastUpdatedTop100: 0,
   },
   (items) => {
+	const now = Date.now();
+	const oneDay = 24 * 60 * 60 * 1000;
+	if (new Date(items.lastUpdatedTop100).getTime() < now - 10 * oneDay) {
+		if (!window.location.href.includes("/top100?closeautomatically=true"))
+			window.open("/top100?closeautomatically=true", "_blank");
+	}
+	document.querySelectorAll(".pbi-widget-user").forEach(element => {
+		const username = element.innerText.replace(/ /g, "").toLowerCase().trim().split("(")[0];
+		if (!items.top100.includes(username)) return;
+		element.innerHTML += "<span title=\"Top 100\">👑</span>";
+	});
     // ANCHOR - Login automatically
     try {
       if (
