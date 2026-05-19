@@ -6,6 +6,6 @@ chrome.storage.sync.get("top100", ({ top100 }) => {
 		div.col-md-4.bg-body-tertiary.rounded >
 		div.center.padding18`).innerHTML += `<span style="
 		position: fixed; z-index: 999; font-size: xxx-large; translate: -45px
-		135px; background: #2b3035; border-radius: 100%; width: 70px; height: 70px;
+		135px; background: transparent; border-radius: 100%; width: 70px; height: 70px;
 		">👑</span> `;
 });
