@@ -2,6 +2,10 @@
 	--li-animation-easing: cubic-bezier(0.22, 0.61, 0.36, 1.00);
 }
 
+#bara_navigare .dropdown-menu {
+	border: #495057 2px solid !important;
+}
+
 progress[value] {
 	--color: rgb(48, 114, 171);
 	--background: #272a2b77;
