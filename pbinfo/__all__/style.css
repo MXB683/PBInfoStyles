@@ -2,11 +2,8 @@
 	--li-animation-easing: cubic-bezier(0.22, 0.61, 0.36, 1.00);
 }
 
-#meniu-navigare-li-notificari-noi,
-#meniu-navigare-li-mesaje-noi,
-li>a[href="/logout.php"][title="Deconectare"],
-#adbw>div {
-	display: none;
+#bara_navigare .dropdown-menu {
+	border: #495057 2px solid !important;
 }
 
 progress[value] {
