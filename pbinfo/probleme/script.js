@@ -6,7 +6,7 @@ chrome.storage.sync.get(
   },
   (items = { algorithms: [{ title: "", algorithm: "" }] }) => {
     let algorithmMenuParentNode = document.querySelector(
-      "#form-incarcare-solutie-wrapper > div.card-body"
+      "#form-incarcare-solutie-wrapper > div.card-body",
     );
     let selectMenu = document.createElement("select");
     selectMenu.classList.add("form-control");
@@ -30,5 +30,5 @@ chrome.storage.sync.get(
     selectMenu.addEventListener("change", () => {
       navigator.clipboard.writeText(`${selectMenu.value}\n`);
     });
-  }
+  },
 );

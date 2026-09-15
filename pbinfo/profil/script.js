@@ -1,7 +1,12 @@
 chrome.storage.sync.get("top100", ({ top100 }) => {
-	const username = document.querySelector("#zona-mijloc > div > div:nth-child(4) > div.row > div.col-md-4.bg-body-tertiary.rounded > div.text-center.rounded.border.my-3.p-3 > h2 > span").innerText.replace(/ /g, "").toLowerCase();
-	if (top100.includes(username))
-		document.querySelector(`#zona-mijloc > div > div:nth-child(4) >
+  const username = document
+    .querySelector(
+      "#zona-mijloc > div > div:nth-child(4) > div.row > div.col-md-4.bg-body-tertiary.rounded > div.text-center.rounded.border.my-3.p-3 > h2 > span",
+    )
+    .innerText.replace(/ /g, "")
+    .toLowerCase();
+  if (top100.includes(username))
+    document.querySelector(`#zona-mijloc > div > div:nth-child(4) >
 		div.row >
 		div.col-md-4.bg-body-tertiary.rounded >
 		div.center.padding18`).innerHTML += `<span style="

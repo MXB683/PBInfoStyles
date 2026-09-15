@@ -11,7 +11,7 @@ function handleInterceptedData(data, url) {
 
   // Dispatch custom event to content script
   window.dispatchEvent(
-    new CustomEvent("solutionData", { detail: { url, data } })
+    new CustomEvent("solutionData", { detail: { url, data } }),
   );
 }
 

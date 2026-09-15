@@ -48,6 +48,6 @@ window.addEventListener("solutionData", (event) => {
       items.streakProfiles[correctSource.user.user].currentStreak += 1;
       items.streakProfiles[correctSource.user.user].lastSolvedDate = today;
       chrome.storage.sync.set({ streakProfiles: items.streakProfiles });
-    }
+    },
   );
 });
